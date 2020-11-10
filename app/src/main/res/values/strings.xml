@@ -14,4 +14,16 @@
     <string name="home">Home</string>
     <string name="chat">Chat</string>
     <string name="account">Account</string>
+    <string name="user_name">User Name</string>
+    <string name="team">team</string>
+    <string name="userimage">UserImage</string>
+    <string name="profile_image">Profile image</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="personal_information">Personal information</string>
+    <string name="support">Support</string>
+    <string name="get_help_faq_s">Get help - FAQ\'s</string>
+    <string name="rate_feedback"><![CDATA[Rate & Feedback]]></string>
+    <string name="share_the_app">Share the app</string>
+    <string name="share_icon">Share Icon</string>
+    <string name="logout">Logout</string>
 </resources>

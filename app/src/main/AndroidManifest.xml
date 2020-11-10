@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FanCorner">
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".OTPScreen" />
         <activity android:name=".SignInScreen">
             <intent-filter>

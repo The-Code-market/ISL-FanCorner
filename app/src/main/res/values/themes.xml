@@ -13,4 +13,10 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <!--Bottom navigation bar theme-->
+    <style name="BottomNavigationTheme" parent="Theme.AppCompat.Light">
+        <item name="colorPrimary">@color/colorRed</item>
+        <item name="android:textColorSecondary">@color/colorPrimary</item>
+    </style>
 </resources>

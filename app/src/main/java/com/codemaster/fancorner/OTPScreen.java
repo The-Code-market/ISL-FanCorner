@@ -24,7 +24,7 @@ public class OTPScreen extends AppCompatActivity {
         verifyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent mainScreenIntent = new Intent(OTPScreen.this, MainActivity.class);
+                Intent mainScreenIntent = new Intent(OTPScreen.this, ChatScreen.class);
                 startActivity(mainScreenIntent);
             }
         });

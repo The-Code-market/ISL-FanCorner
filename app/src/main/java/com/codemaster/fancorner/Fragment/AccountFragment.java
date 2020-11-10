@@ -23,6 +23,7 @@ public class AccountFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
 
+        //initialization
         userNameText = view.findViewById(R.id.userNameText);
         logoutText = view.findViewById(R.id.logoutText);
         roleText = view.findViewById(R.id.teamText);
@@ -31,7 +32,7 @@ public class AccountFragment extends Fragment {
         rateFeedBackCard = view.findViewById(R.id.rateFeedBackCard);
 
         rateFeedBackCard.setOnClickListener(v -> {
-            Intent rateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id="+ BuildConfig.APPLICATION_ID));
+            Intent rateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID));
             startActivity(rateIntent);
         });
 
@@ -44,6 +45,5 @@ public class AccountFragment extends Fragment {
         });
 
         return view;
-
     }
 }

@@ -23,7 +23,8 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <ScrollView
+        android:id="@+id/scroller"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/appBar"
@@ -31,12 +32,13 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/bottomCard"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:layout_alignParentBottom="true"
         android:theme="@style/Theme.MaterialComponents.Light"
-        app:cardBackgroundColor="@color/colorGray"
-        app:cardCornerRadius="0dp">
+        app:cardBackgroundColor="@color/colorPrimary"
+        app:cardCornerRadius="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,43 +50,41 @@
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="bottom"
                 android:layout_marginHorizontal="10dp"
                 android:src="@drawable/ic_add"
                 app:tint="@color/colorBlack"
                 tools:ignore="ContentDescription" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/commentTextField"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                app:boxBackgroundColor="@color/colorWhite"
-                app:boxCornerRadiusBottomEnd="15dp"
-                app:boxCornerRadiusBottomStart="15dp"
-                app:boxCornerRadiusTopEnd="15dp"
-                app:boxCornerRadiusTopStart="15dp"
-                app:boxStrokeColor="@color/colorBlack">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/commentTextEdit"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <ImageView
-                android:layout_width="25dp"
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginHorizontal="10dp"
-                android:src="@drawable/ic_right_arrow"
-                app:tint="@color/colorBlack"
-                tools:ignore="ContentDescription" />
+                android:layout_marginLeft="5dp"
+                android:hint="type here..."
+                android:scrollbarStyle="insideInset"
+                android:scrollbars="vertical"
+                android:maxHeight="200dp"
+                android:id="@+id/msgbox"
+                android:background="@android:color/transparent"
+                />
 
         </LinearLayout>
 
+
+
+
+
     </com.google.android.material.card.MaterialCardView>
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="320dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/ic_right_arrow"
+        android:id="@+id/sendIm"
+        app:tint="@color/colorBlack"
+        tools:ignore="ContentDescription" />
+
 
 </RelativeLayout>

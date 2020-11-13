@@ -10,9 +10,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class SignInScreen extends AppCompatActivity {
-
+FirebaseAuth mAuth;
     TextInputEditText mobileNumberTextInput;
     Button sendOTPBtn;
     @RequiresApi(api = Build.VERSION_CODES.M)

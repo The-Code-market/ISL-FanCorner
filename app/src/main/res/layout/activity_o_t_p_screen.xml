@@ -29,10 +29,10 @@
     <com.chaos.view.PinView
         android:id="@+id/pinView"
         style="@style/PinWidget.PinView"
-        android:layout_width="210sp"
-        android:layout_height="50dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:inputType="number"
-        app:itemCount="4" />
+        app:itemCount="6" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -64,5 +64,5 @@
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 </LinearLayout>

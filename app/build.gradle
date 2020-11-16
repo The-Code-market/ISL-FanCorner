@@ -1,5 +1,6 @@
 plugins {
     id 'com.android.application'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -40,9 +41,12 @@ dependencies {
     implementation 'com.google.android.material:material:1.2.1'
     //OTP PIN View Design
     implementation 'com.chaos.view:pinview:1.4.3'
+    implementation 'com.github.GoodieBag:Pinview:v1.4'
+
     //Firebase
     implementation 'de.hdodenhof:circleimageview:3.1.0'
     implementation 'com.google.firebase:firebase-auth:20.0.1'
     implementation 'com.google.firebase:firebase-database:19.5.1'
     implementation 'com.google.firebase:firebase-storage:19.2.0'
+    implementation 'androidx.browser:browser:1.2.0'
 }

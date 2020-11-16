@@ -49,14 +49,14 @@ public class ChatScreen extends AppCompatActivity {
         send=findViewById(R.id.sendIm);
         scrollView=findViewById(R.id.scroller);
         mauth=FirebaseAuth.getInstance();
-        usName=viewR.findViewById(R.id.msgUser);
-        time=viewR.findViewById(R.id.msgTime);
-        date=viewR.findViewById(R.id.msgDate);
-        message=viewR.findViewById(R.id.msgM);
-        smsg=viewS.findViewById(R.id.mssgM);
-        sdate=viewS.findViewById(R.id.mssgDate);
-        stime=viewS.findViewById(R.id.mssgTime);
-        circleImageView=viewR.findViewById(R.id.profileRec_image);
+        usName=(TextView)viewR.findViewById(R.id.msgUser);
+        time=(TextView)viewR.findViewById(R.id.msgTime);
+        date=(TextView)viewR.findViewById(R.id.msgDate);
+        message=(TextView)viewR.findViewById(R.id.msgM);
+        smsg=(TextView)viewS.findViewById(R.id.mssgM);
+        sdate=(TextView)viewS.findViewById(R.id.mssgDate);
+        stime=(TextView)viewS.findViewById(R.id.mssgTime);
+        circleImageView=(CircleImageView)viewR.findViewById(R.id.profileRec_image);
         db= FirebaseDatabase.getInstance().getReference();
         db.child("Users").child(mauth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

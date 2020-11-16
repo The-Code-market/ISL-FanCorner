@@ -13,16 +13,18 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.concurrent.TimeUnit;
 
 public class OTPScreen extends AppCompatActivity {
-
     FirebaseAuth mAuth;
     String verificationCodeBySystem;
     String phoneNumberStr;
@@ -104,9 +106,9 @@ public class OTPScreen extends AppCompatActivity {
     private void signInTheUserByCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential).addOnCompleteListener(OTPScreen.this, task -> {
             if (task.isSuccessful()) {
-                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(mainIntent);
+                Intent createAccountIntent = new Intent(getApplicationContext(), CreateAccountScreen.class);
+                createAccountIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(createAccountIntent);
             } else {
                 Toast.makeText(OTPScreen.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }

@@ -9,12 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FanCorner">
-        <activity android:name=".CreateAccountScreen"></activity>
-        <activity
-            android:name=".ChatScreen"
-            android:theme="@style/Theme.FanCorner.RedStatusBar"></activity>
+        <activity android:name=".ChatScreen" android:theme="@style/Theme.FanCorner.RedStatusBar" />
         <activity android:name=".MainActivity" />
         <activity android:name=".OTPScreen" />
+        <activity android:name=".CreateAccountScreen"/>
         <activity android:name=".SignInScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

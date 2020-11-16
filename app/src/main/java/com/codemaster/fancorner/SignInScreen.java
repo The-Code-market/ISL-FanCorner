@@ -13,9 +13,12 @@ import android.widget.Button;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class SignInScreen extends AppCompatActivity {
-
+    private DatabaseReference mDatabase;
+    FirebaseDatabase firebaseDatabase;
     TextInputEditText mobileNumberTextInput;
     Button sendOTPBtn;
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -43,10 +46,7 @@ public class SignInScreen extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-        if (firebaseUser!=null){
-            Intent homeIntent=new Intent(SignInScreen.this, MainActivity.class);
-            startActivity(homeIntent);
-            finish();
-        }
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
     }
 }

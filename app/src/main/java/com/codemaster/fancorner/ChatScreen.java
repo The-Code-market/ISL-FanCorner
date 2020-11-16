@@ -53,13 +53,10 @@ public class ChatScreen extends AppCompatActivity {
 
             }
         });
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                sendMessageInfo();
-                msgBox.getText().clear();
+        send.setOnClickListener(view -> {
+            sendMessageInfo();
+            msgBox.getText().clear();
 
-            }
         });
     }
 

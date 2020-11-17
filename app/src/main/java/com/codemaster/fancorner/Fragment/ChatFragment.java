@@ -1,5 +1,6 @@
 package com.codemaster.fancorner.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.codemaster.fancorner.ChatScreen;
 import com.codemaster.fancorner.R;
 
 /**
@@ -55,6 +57,8 @@ public class ChatFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        startActivity(new Intent(getContext(),ChatScreen.class));
+        
     }
 
     @Override

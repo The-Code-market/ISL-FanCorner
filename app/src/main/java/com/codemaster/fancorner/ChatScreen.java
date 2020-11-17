@@ -49,6 +49,10 @@ public class ChatScreen extends AppCompatActivity {
         send=findViewById(R.id.sendIm);
         scrollView=findViewById(R.id.scroller);
         mauth=FirebaseAuth.getInstance();
+        LayoutInflater inflaterR =  (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        viewR = inflaterR.inflate(R.layout.messageiew, null);
+        LayoutInflater inflaterS =  (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        viewS = inflaterS.inflate(R.layout.senderview, null);
         usName=(TextView)viewR.findViewById(R.id.msgUser);
         time=(TextView)viewR.findViewById(R.id.msgTime);
         date=(TextView)viewR.findViewById(R.id.msgDate);
@@ -58,11 +62,11 @@ public class ChatScreen extends AppCompatActivity {
         stime=(TextView)viewS.findViewById(R.id.mssgTime);
         circleImageView=(CircleImageView)viewR.findViewById(R.id.profileRec_image);
         db= FirebaseDatabase.getInstance().getReference();
-        db.child("Users").child(mauth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        db.child("users").child(mauth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
-                    userName=snapshot.child("username").getValue().toString();
+                    userName=snapshot.child("userName").getValue().toString();
                 }
             }
 
@@ -100,7 +104,6 @@ public class ChatScreen extends AppCompatActivity {
             }
     }
 
-@SuppressLint("ResourceType")
 private void DisplayMessages(DataSnapshot dataSnapshot){
     Iterator iterator=dataSnapshot.getChildren().iterator();
     while (iterator.hasNext()){
@@ -108,10 +111,7 @@ private void DisplayMessages(DataSnapshot dataSnapshot){
         String chatMessage=(String) ((DataSnapshot)iterator.next()).getValue();
         String chatTime=(String) ((DataSnapshot)iterator.next()).getValue();
         String chatUsername=(String) ((DataSnapshot)iterator.next()).getValue();
-        LayoutInflater inflaterR =  (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-         viewR = inflaterR.inflate(R.layout.messageiew, null);
-        LayoutInflater inflaterS =  (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        viewS = inflaterS.inflate(R.layout.senderview, null);
+
 
 
         if(mauth.getUid().equals(((DataSnapshot) iterator.next()).getKey())){

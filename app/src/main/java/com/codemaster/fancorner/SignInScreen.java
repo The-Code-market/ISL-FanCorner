@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.codemaster.fancorner.SharedPreference.SharedPreference;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,8 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class SignInScreen extends AppCompatActivity {
-    private DatabaseReference mDatabase;
-    FirebaseDatabase firebaseDatabase;
     TextInputEditText mobileNumberTextInput;
     Button sendOTPBtn;
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -36,17 +35,17 @@ public class SignInScreen extends AppCompatActivity {
         sendOTPBtn.setOnClickListener(v -> {
             Intent OTpScreenIntent = new Intent(SignInScreen.this, OTPScreen.class);
             OTpScreenIntent.putExtra("PhoneNumber", "+91" + mobileNumberTextInput.getText().toString());
-            Log.i("here Sign In", String.valueOf(mobileNumberTextInput.getText()));
             startActivity(OTpScreenIntent);
         });
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        if (SharedPreference.getUserVerified(getApplicationContext())){
+            Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+            startActivity(mainIntent);
+            finish();
+        }
     }
 }

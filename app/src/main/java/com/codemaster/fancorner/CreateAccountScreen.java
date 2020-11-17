@@ -11,6 +11,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.codemaster.fancorner.SharedPreference.SharedPreference;
 import com.codemaster.fancorner.model.UserDetails;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -43,6 +44,7 @@ public class CreateAccountScreen extends AppCompatActivity {
 
         setUpDropDownTeams();
 
+        //Initialize Firebase
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         createAccountBtn.setOnClickListener(v -> {
@@ -61,8 +63,10 @@ public class CreateAccountScreen extends AppCompatActivity {
         UserDetails user = new UserDetails(uid, userName, team, phone);
 
         mDatabase.child("users").child(uid).setValue(user).addOnSuccessListener(aVoid -> {
+            SharedPreference.setUserVerified(getApplicationContext(), true);
             Intent mainIntent = new Intent(CreateAccountScreen.this, MainActivity.class);
             startActivity(mainIntent);
+            finish();
         }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 

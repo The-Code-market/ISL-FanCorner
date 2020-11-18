@@ -23,12 +23,16 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <ScrollView
-        android:id="@+id/scroller"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/appBar"
-        android:layout_above="@+id/bottomCard"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_below="@+id/appBar"
+
+            android:layout_above="@+id/bottomCard"
+            android:id="@+id/scrollFirst"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/bottomCard"

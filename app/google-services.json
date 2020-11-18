@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "595558200461",
+    "firebase_url": "https://fanfight-d4036.firebaseio.com",
+    "project_id": "fanfight-d4036",
+    "storage_bucket": "fanfight-d4036.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:595558200461:android:b2df2a3f92f62172c91ec4",
+        "android_client_info": {
+          "package_name": "com.codemaster.fancorner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "595558200461-8fucc4pqqefo9lq363iu55s0b4fk0eda.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codemaster.fancorner",
+            "certificate_hash": "185065d618bb9a4e1e201e99280b0e16941eeab1"
+          }
+        },
+        {
+          "client_id": "595558200461-7ui09j5jceqffs8fbocjp2qg78d3kbq1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codemaster.fancorner",
+            "certificate_hash": "e0fe2bfea8cd21a397867cf881a7de024a8f3819"
+          }
+        },
+        {
+          "client_id": "595558200461-hmhnu7a0ie67or2m3038cm9lp91o9tna.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD4zRniy1rMuAN4FWrEl-yoG3aNiIa2pxo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "595558200461-hmhnu7a0ie67or2m3038cm9lp91o9tna.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

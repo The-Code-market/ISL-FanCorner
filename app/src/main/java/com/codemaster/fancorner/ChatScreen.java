@@ -3,6 +3,8 @@ package com.codemaster.fancorner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,7 +12,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +30,11 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -38,39 +44,28 @@ public class ChatScreen extends AppCompatActivity {
     TextInputEditText msgBox;
     ImageView send;
     String currentDate,currentTime,userName;
-    ScrollView scrollView;
-    TextView usName,message,date,time,sdate,stime,smsg;
-    CircleImageView circleImageView;
-    @Override
+    RecyclerView relativeLayout;
+
+    private final List<Messages> messagesList=new ArrayList<>();
+    private LinearLayoutManager layoutManager;
+    private MessageAdapter messageAdapter;
+//    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_screen);
         msgBox=findViewById(R.id.msgbox);
         send=findViewById(R.id.sendIm);
-        scrollView=findViewById(R.id.scroller);
+
+        relativeLayout=findViewById(R.id.scrollFirst);
         mauth=FirebaseAuth.getInstance();
-        usName=(TextView)viewR.findViewById(R.id.msgUser);
-        time=(TextView)viewR.findViewById(R.id.msgTime);
-        date=(TextView)viewR.findViewById(R.id.msgDate);
-        message=(TextView)viewR.findViewById(R.id.msgM);
-        smsg=(TextView)viewS.findViewById(R.id.mssgM);
-        sdate=(TextView)viewS.findViewById(R.id.mssgDate);
-        stime=(TextView)viewS.findViewById(R.id.mssgTime);
-        circleImageView=(CircleImageView)viewR.findViewById(R.id.profileRec_image);
+
         db= FirebaseDatabase.getInstance().getReference();
-        db.child("Users").child(mauth.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    userName=snapshot.child("username").getValue().toString();
-                }
-            }
+        messageAdapter=new MessageAdapter(messagesList);
+        layoutManager=new LinearLayoutManager(this);
+        relativeLayout.setLayoutManager(layoutManager);
+        relativeLayout.setAdapter(messageAdapter);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
         send.setOnClickListener(view -> {
             sendMessageInfo();
             msgBox.getText().clear();
@@ -80,59 +75,48 @@ public class ChatScreen extends AppCompatActivity {
 
     private void sendMessageInfo(){
         String message=msgBox.getText().toString();
+        String messageKey=db.child("Messages").push().getKey();
+
         if(TextUtils.isEmpty(message)){
             Toast.makeText(getApplicationContext(),"Please write a message first",Toast.LENGTH_SHORT);
         }
         else {
-            Calendar calendar=Calendar.getInstance();
-            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MMM dd,yyyy");
-            currentDate=simpleDateFormat.format(calendar.getTime());
-            Calendar calendart=Calendar.getInstance();
-            SimpleDateFormat simpleDateFormatt=new SimpleDateFormat("hh:mm a");
-            currentTime=simpleDateFormatt.format(calendart.getTime());
-            HashMap<String,Object> msgKey=new HashMap<>();
-            msgKey.put("name",userName);
-            msgKey.put("message",message);
-            msgKey.put("date",currentDate);
-            msgKey.put("time",currentTime);
-            db.child("Messages").child(mauth.getUid()).updateChildren(msgKey);
-            scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+
+            db.child("users").child(mauth.getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+                        userName =snapshot.child("userName").getValue().toString();
+                    }
+                    Calendar calendar=Calendar.getInstance();
+                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MMM dd,yyyy");
+                    currentDate=simpleDateFormat.format(calendar.getTime());
+                    Calendar calendart=Calendar.getInstance();
+                    SimpleDateFormat simpleDateFormatt=new SimpleDateFormat("hh:mm a");
+                    currentTime=simpleDateFormatt.format(calendart.getTime());
+                    HashMap<String,Object> msgKey=new HashMap<>();
+                    msgKey.put("name",userName);
+                    msgKey.put("message",message);
+                    msgKey.put("date",currentDate);
+                    msgKey.put("time",currentTime);
+                    msgKey.put("ud",mauth.getUid());
+                    msgKey.put("type","t");
+                    db.child("Messages").child(messageKey).updateChildren(msgKey);
+                    relativeLayout.smoothScrollToPosition(relativeLayout.getAdapter().getItemCount());
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
             }
     }
 
-@SuppressLint("ResourceType")
-private void DisplayMessages(DataSnapshot dataSnapshot){
-    Iterator iterator=dataSnapshot.getChildren().iterator();
-    while (iterator.hasNext()){
-        String chatDate=(String) ((DataSnapshot)iterator.next()).getValue();
-        String chatMessage=(String) ((DataSnapshot)iterator.next()).getValue();
-        String chatTime=(String) ((DataSnapshot)iterator.next()).getValue();
-        String chatUsername=(String) ((DataSnapshot)iterator.next()).getValue();
-        LayoutInflater inflaterR =  (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-         viewR = inflaterR.inflate(R.layout.messageiew, null);
-        LayoutInflater inflaterS =  (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        viewS = inflaterS.inflate(R.layout.senderview, null);
 
 
-        if(mauth.getUid().equals(((DataSnapshot) iterator.next()).getKey())){
-            smsg.setText(chatMessage);
-            sdate.setText(chatDate);
-            stime.setText(chatTime);
-            scrollView.addView(viewS);
 
-        }
-        else {
-            circleImageView.setImageResource(R.drawable.common_full_open_on_phone);
-            usName.setText(chatUsername);
-            date.setText(chatDate);
-            time.setText(chatTime);
-            message.setText(chatMessage);
-            scrollView.addView(viewR);
-
-        }
-        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
-    }
-}
 
     @Override
     protected void onStart() {
@@ -141,7 +125,9 @@ private void DisplayMessages(DataSnapshot dataSnapshot){
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
                 if(snapshot.exists()){
-                    DisplayMessages(snapshot);
+                    Messages messages=snapshot.getValue(Messages.class);
+                    messagesList.add(messages);
+                    messageAdapter.notifyDataSetChanged();
                 }
 
             }
@@ -189,5 +175,5 @@ private void DisplayMessages(DataSnapshot dataSnapshot){
 
 
    }
-    View viewS,viewR;
+
 }

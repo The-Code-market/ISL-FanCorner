@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "595558200461-8fucc4pqqefo9lq363iu55s0b4fk0eda.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codemaster.fancorner",
+            "certificate_hash": "185065d618bb9a4e1e201e99280b0e16941eeab1"
+          }
+        },
+        {
           "client_id": "595558200461-7ui09j5jceqffs8fbocjp2qg78d3kbq1.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {

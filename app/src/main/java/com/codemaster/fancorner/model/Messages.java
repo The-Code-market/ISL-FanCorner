@@ -1,19 +1,20 @@
-package com.codemaster.fancorner;
+package com.codemaster.fancorner.model;
 
 public class Messages {
-    private String message,type,ud,time,date,name;
-    public Messages(String date,String message,String name,String time,String type,String ud){
-        this.date=date;
-        this.message=message;
-        this.name=name;
-        this.time=time;
-        this.type=type;
-        this.ud=ud;
+    private String message, type, ud, time, date, name;
+
+    public Messages(String date, String message, String name, String time, String type, String ud) {
+        this.date = date;
+        this.message = message;
+        this.name = name;
+        this.time = time;
+        this.type = type;
+        this.ud = ud;
     }
 
-        public Messages(){
+    public Messages() {
 
-        }
+    }
 
     public String getMessage() {
         return message;

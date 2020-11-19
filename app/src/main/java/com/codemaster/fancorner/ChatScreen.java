@@ -2,23 +2,33 @@ package com.codemaster.fancorner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.PrecomputedText;
 import android.text.TextUtils;
+import android.transition.Slide;
+import android.transition.Transition;
+import android.transition.TransitionSet;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -42,7 +52,7 @@ public class ChatScreen extends AppCompatActivity {
     FirebaseAuth mauth;
     DatabaseReference db;
     TextInputEditText msgBox;
-    ImageView send;
+    ImageView send,attach;
     String currentDate,currentTime,userName;
     RecyclerView relativeLayout;
 
@@ -57,6 +67,7 @@ public class ChatScreen extends AppCompatActivity {
         send=findViewById(R.id.sendIm);
 
         relativeLayout=findViewById(R.id.scrollFirst);
+        attach=findViewById(R.id.attachFile);
         mauth=FirebaseAuth.getInstance();
 
         db= FirebaseDatabase.getInstance().getReference();
@@ -71,8 +82,41 @@ public class ChatScreen extends AppCompatActivity {
             msgBox.getText().clear();
 
         });
-    }
+        attach.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @Override
+            public void onClick(View v) {
+                AttachDialog attachDialog=new AttachDialog(ChatScreen.this);
+                attachDialog.setCancelable(true);
+                Window window=attachDialog.getWindow();
+                window.setLayout(ChipGroup.LayoutParams.FILL_PARENT, ChipGroup.LayoutParams.WRAP_CONTENT);
+                window.setGravity(Gravity.BOTTOM);
+                attachDialog.show();
+                attachDialog.cF.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intentf = new Intent();
+                        intentf.setAction(Intent.ACTION_GET_CONTENT);
+                        intentf.setType( "image/*");
+                        startActivityForResult(intentf,20);
+                        attachDialog.dismiss();
+                    }
+                });
 
+                attachDialog.cG.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent galleryIntent = new Intent(
+                                Intent.ACTION_PICK,
+                                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                       startActivityForResult(galleryIntent,2);
+                        attachDialog.dismiss();
+
+                    }
+                });
+            }
+        });
+    }
     private void sendMessageInfo(){
         String message=msgBox.getText().toString();
         String messageKey=db.child("Messages").push().getKey();
@@ -102,6 +146,7 @@ public class ChatScreen extends AppCompatActivity {
                     msgKey.put("ud",mauth.getUid());
                     msgKey.put("type","t");
                     db.child("Messages").child(messageKey).updateChildren(msgKey);
+                    relativeLayout.getAdapter().notifyDataSetChanged();
                     relativeLayout.smoothScrollToPosition(relativeLayout.getAdapter().getItemCount());
                 }
 
@@ -111,16 +156,32 @@ public class ChatScreen extends AppCompatActivity {
                 }
             });
 
-            }
+        }
     }
+    private String teamCheck(String s){
+
+        final String[] teamName = new String[1];
+
+        db.child("Users").child(s).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    teamName[0] =snapshot.child("team").getValue().toString();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        return teamName[0];
 
 
-
-
-
-    @Override
+    }
+@Override
     protected void onStart() {
-        super.onStart();
+            super.onStart();
         db.child("Messages").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
@@ -128,6 +189,8 @@ public class ChatScreen extends AppCompatActivity {
                     Messages messages=snapshot.getValue(Messages.class);
                     messagesList.add(messages);
                     messageAdapter.notifyDataSetChanged();
+                    relativeLayout.smoothScrollToPosition(relativeLayout.getAdapter().getItemCount());
+
                 }
 
             }
@@ -154,26 +217,23 @@ public class ChatScreen extends AppCompatActivity {
         });
 
     }
-   private String teamCheck(String s){
-
-       final String[] teamName = new String[1];
-
-        db.child("Users").child(s).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    teamName[0] =snapshot.child("team").getValue().toString();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return teamName[0];
 
 
-   }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 20 && resultCode == RESULT_OK) {
+            Intent sintent = new Intent(ChatScreen.this, ImageSend.class);
+            sintent.putExtra("imageUri", data.getData().toString());
+            startActivity(sintent);
+        }
+        if (requestCode == 2 && resultCode == RESULT_OK) {
+            Intent sintent = new Intent(ChatScreen.this, ImageSend.class);
+            sintent.putExtra("imageUri", data.getData().toString());
+            startActivity(sintent);
+        }
+
+    }
 
 }

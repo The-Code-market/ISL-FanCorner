@@ -107,6 +107,7 @@ public class OTPScreen extends AppCompatActivity {
                 Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
                 mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(mainIntent);
+                finish();
             } else {
                 Toast.makeText(OTPScreen.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }

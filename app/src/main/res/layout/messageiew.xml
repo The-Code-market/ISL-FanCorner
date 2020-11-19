@@ -18,7 +18,7 @@
         app:civ_border_color="#9C27B0"/>
     <RelativeLayout
         android:id="@+id/rLayout"
-        android:layout_marginLeft="55dp"
+        android:layout_marginLeft="60dp"
         android:background="@drawable/recieverlayout"
         android:layout_width="180dp"
         android:layout_height="wrap_content">
@@ -27,10 +27,12 @@
     android:textColor="@android:color/holo_blue_dark"
     android:text="username"
     android:textStyle="bold"
+    android:layout_marginLeft="3dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"/>
     <TextView
         android:id="@+id/msgM"
+        android:layout_marginLeft="3dp"
         android:textColor="@android:color/black"
         android:text="message displayed here"
         android:layout_below="@+id/msgUser"
@@ -64,7 +66,7 @@
         <TextView
             android:id="@+id/mssgM"
             android:textColor="@android:color/black"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="13dp"
             android:text="message displayed here"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
@@ -82,6 +84,83 @@
             android:layout_marginRight="15dp"
             android:layout_marginTop="2dp"
             android:id="@+id/mssgTime"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/imageRec"
+        android:layout_marginLeft="60dp"
+        android:background="@drawable/recieverlayout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/imgUser"
+                android:textColor="@android:color/holo_blue_dark"
+                android:text="username"
+                android:textStyle="bold"
+                android:layout_marginLeft="3dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        <ImageView
+            android:layout_below="@+id/imgUser"
+            android:layout_margin="5dp"
+            android:id="@+id/imgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_below="@+id/imgView"
+            android:text="date"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="2dp"
+            android:id="@+id/imgDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="time"
+            android:layout_below="@+id/imgView"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="2dp"
+            android:id="@+id/imgTime"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_toEndOf="@+id/rLayout"
+        android:id="@+id/imgSend"
+        android:background="@drawable/senderlayout"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/imageRec"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:layout_margin="5dp"
+            android:id="@+id/imgSview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:layout_below="@+id/imgSview"
+            android:text="date"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="2dp"
+            android:id="@+id/imgSdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:text="time"
+            android:layout_below="@+id/imgSview"
+            android:layout_marginRight="15dp"
+            android:layout_marginTop="2dp"
+            android:id="@+id/imgStime"
             android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>

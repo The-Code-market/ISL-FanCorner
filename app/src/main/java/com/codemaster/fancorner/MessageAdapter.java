@@ -1,8 +1,10 @@
 package com.codemaster.fancorner;
 
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -45,10 +48,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         String chatTime=messages.getTime();
         String chatName=messages.getName();
         String chatUid=messages.getUd();
-
-        if(currentUserId.equals(chatUid)) {
+    if(chatType.equals("t"))
+    {  if(currentUserId.equals(chatUid)) {
             holder.sLay.setVisibility(View.VISIBLE);
-
+            holder.imgRL.setVisibility(View.GONE);
+            holder.imgSL.setVisibility(View.GONE);
             holder.rLay.setVisibility(View.GONE);
             holder.circleImageView.setVisibility(View.GONE);
             holder.stime.setText(chatTime);
@@ -58,8 +62,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
        }
         else {
+            holder.imgRL.setVisibility(View.GONE);
+            holder.imgSL.setVisibility(View.GONE);
             holder.sLay.setVisibility(View.GONE);
             holder.rLay.setVisibility(View.VISIBLE);
+            holder.circleImageView.setVisibility(View.VISIBLE);
             holder.rname.setText(chatName);
             holder.rtime.setText(chatTime);
             holder.rdate.setText(chatDate);
@@ -68,6 +75,37 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         }
 
     }
+    else if(chatType.equals("i")){
+
+        if(currentUserId.equals(chatUid)) {
+            holder.sLay.setVisibility(View.GONE);
+            holder.imgSL.setVisibility(View.VISIBLE);
+            holder.rLay.setVisibility(View.GONE);
+            holder.circleImageView.setVisibility(View.GONE);
+            holder.imgRL.setVisibility(View.GONE);
+            holder.imsTime.setText(chatTime);
+            holder.imsDate.setText(chatDate);
+            Picasso.get().load(chatMessage).into(holder.sIm);
+
+
+        }
+        else {
+            holder.sLay.setVisibility(View.GONE);
+            holder.rLay.setVisibility(View.GONE);
+            holder.imgRL.setVisibility(View.VISIBLE);
+            holder.imgSL.setVisibility(View.GONE);
+            holder.imName.setText(chatName);
+            holder.rtime.setText(chatTime);
+            holder.rdate.setText(chatDate);
+            holder.circleImageView.setVisibility(View.VISIBLE);
+            Picasso.get().load(chatMessage).into(holder.rIm);
+
+
+        }
+    }
+
+    }
+
 
     @Override
     public int getItemCount() {
@@ -75,9 +113,10 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     }
 
     public class MessageViewHolder extends RecyclerView.ViewHolder{
-        public TextView senderMessage,receiverMessage,rdate,rtime,sdate,stime,rname;
+        public TextView senderMessage,receiverMessage,rdate,rtime,sdate,stime,rname,imsDate,imrDate,imsTime,imrTime,imName;
         public CircleImageView circleImageView;
-        RelativeLayout sLay,rLay;
+        ImageView sIm,rIm;
+        RelativeLayout sLay,rLay,imgSL,imgRL;
         public MessageViewHolder(@NonNull View view){
 
             super(view);
@@ -91,6 +130,17 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             rname=view.findViewById(R.id.msgUser);
             sLay=view.findViewById(R.id.sLayout);
             rLay=view.findViewById(R.id.rLayout);
+            imgRL=view.findViewById(R.id.imageRec);
+            imgSL=view.findViewById(R.id.imgSend);
+
+            imrDate=view.findViewById(R.id.imgDate);
+            imrTime=view.findViewById(R.id.imgTime);
+            imsDate=view.findViewById(R.id.imgSdate);
+            imsTime=view.findViewById(R.id.imgStime);
+            imName=view.findViewById(R.id.imgUser);
+            sIm=view.findViewById(R.id.imgView);
+            sIm=view.findViewById(R.id.imgSview);
+
 
 
         }

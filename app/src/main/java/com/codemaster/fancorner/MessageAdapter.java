@@ -96,8 +96,8 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             holder.imgRL.setVisibility(View.VISIBLE);
             holder.imgSL.setVisibility(View.GONE);
             holder.imName.setText(chatName);
-            holder.rtime.setText(chatTime);
-            holder.rdate.setText(chatDate);
+            holder.imrTime.setText(chatTime);
+            holder.imsDate.setText(chatDate);
             holder.circleImageView.setVisibility(View.VISIBLE);
             Picasso.get().load(chatMessage).into(holder.rIm);
 

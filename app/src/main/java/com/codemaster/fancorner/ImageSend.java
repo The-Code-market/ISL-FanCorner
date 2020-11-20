@@ -144,9 +144,7 @@ ProgressDialog dialog;
                                                 dialog.dismiss();
                                                 finish();
                                                 i = null;
-                                                ChatScreen chatScreen;
-                                                chatScreen=new ChatScreen();
-                                                chatScreen.relativeLayout.getAdapter().notifyDataSetChanged();
+
                                             }
                                         }
                                     });

@@ -149,7 +149,7 @@ public class ChatScreen extends AppCompatActivity {
                     db.child("Messages").child(messageKey).updateChildren(msgKey);
                     relativeLayout.getAdapter().notifyDataSetChanged();
                     relativeLayout.smoothScrollToPosition(relativeLayout.getAdapter().getItemCount());
-                    relativeLayout.refreshDrawableState();
+
                 }
 
                 @Override

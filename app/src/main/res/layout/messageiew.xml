@@ -94,7 +94,7 @@
         android:id="@+id/imageRec"
         android:layout_marginLeft="60dp"
         android:background="@drawable/recieverlayout"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content">
 
             <TextView
@@ -136,7 +136,7 @@
         android:layout_toEndOf="@+id/rLayout"
         android:id="@+id/imgSend"
         android:background="@drawable/senderlayout"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_toRightOf="@+id/imageRec"

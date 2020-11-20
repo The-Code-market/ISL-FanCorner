@@ -118,48 +118,50 @@ ProgressDialog dialog;
 
                             downloadUrl=uri.toString();
 
-                        }
-                    });
-
-                    fab.child("users").child(fauth.getUid()).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if (snapshot.exists()) {
-                                userName1 = snapshot.child("userName").getValue().toString();
-                            }
-                            Calendar calendar = Calendar.getInstance();
-                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd,yyyy");
-                            currentDate1 = simpleDateFormat.format(calendar.getTime());
-                            Calendar calendart = Calendar.getInstance();
-                            SimpleDateFormat simpleDateFormatt = new SimpleDateFormat("hh:mm a");
-                            currentTime1 = simpleDateFormatt.format(calendart.getTime());
-                            HashMap<String, Object> msgKey = new HashMap<>();
-                            msgKey.put("name", userName1);
-                            msgKey.put("message", downloadUrl);
-                            msgKey.put("date", currentDate1);
-                            msgKey.put("time", currentTime1);
-                            msgKey.put("ud", fauth.getUid());
-                            msgKey.put("type", "i");
-                            fab.child("Messages").child(messageKey).updateChildren(msgKey).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            fab.child("users").child(fauth.getUid()).addValueEventListener(new ValueEventListener() {
                                 @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        dialog.dismiss();
-                                        finish();
-                                        i = null;
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if (snapshot.exists()) {
+                                        userName1 = snapshot.child("userName").getValue().toString();
                                     }
+                                    Calendar calendar = Calendar.getInstance();
+                                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd,yyyy");
+                                    currentDate1 = simpleDateFormat.format(calendar.getTime());
+                                    Calendar calendart = Calendar.getInstance();
+                                    SimpleDateFormat simpleDateFormatt = new SimpleDateFormat("hh:mm a");
+                                    currentTime1 = simpleDateFormatt.format(calendart.getTime());
+                                    HashMap<String, Object> msgKey = new HashMap<>();
+                                    msgKey.put("name", userName1);
+                                    msgKey.put("message", downloadUrl);
+                                    msgKey.put("date", currentDate1);
+                                    msgKey.put("time", currentTime1);
+                                    msgKey.put("ud", fauth.getUid());
+                                    msgKey.put("type", "i");
+                                    fab.child("Messages").child(messageKey).updateChildren(msgKey).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                dialog.dismiss();
+                                                finish();
+                                                i = null;
+                                            }
+                                        }
+                                    });
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
                                 }
                             });
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
 
                         }
                     });
 
-                }
-            });
+                        }
+                    });
+
+
 
 
                 }

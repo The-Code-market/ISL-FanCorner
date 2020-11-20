@@ -139,7 +139,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             imsDate=view.findViewById(R.id.imgSdate);
             imsTime=view.findViewById(R.id.imgStime);
             imName=view.findViewById(R.id.imgUser);
-            sIm=view.findViewById(R.id.imgView);
+            rIm=view.findViewById(R.id.imgView);
             sIm=view.findViewById(R.id.imgSview);
 
 

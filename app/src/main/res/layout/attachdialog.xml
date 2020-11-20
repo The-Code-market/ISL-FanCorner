@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_marginBottom="25dp"
+    android:layout_alignParentBottom="true"
+    android:layout_height="wrap_content"
+    android:background="@drawable/optback"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<LinearLayout
+    android:layout_centerHorizontal="true"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="10dp"
+        android:id="@+id/fileSelect"
+        android:foreground="@drawable/ic_baseline_folder_open_24"
+        app:cardCornerRadius="10dp"
+        android:layout_width="110dp"
+        android:layout_height="115dp">
+        <TextView
+            android:text="Files"
+            android:textColor="@android:color/background_dark"
+            android:layout_marginTop="45dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.cardview.widget.CardView>
+    <androidx.cardview.widget.CardView
+        android:layout_margin="20dp"
+        android:id="@+id/gallerySelect"
+        android:foreground="@drawable/ic_baseline_image_24"
+        android:layout_toEndOf="@+id/fileSelect"
+        app:cardCornerRadius="10dp"
+        android:layout_width="110dp"
+        android:layout_height="115dp"
+        android:layout_toRightOf="@+id/fileSelect">
+        <TextView
+            android:text="Gallery"
+            android:textColor="@android:color/background_dark"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
+</RelativeLayout>

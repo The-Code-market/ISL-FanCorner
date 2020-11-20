@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ImageSend">
+    <LinearLayout
+        android:id="@+id/cropBar"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal" >
+        <ImageView
+            android:layout_marginTop="3dp"
+            android:layout_marginLeft="300dp"
+            android:src="@drawable/ic_baseline_crop_24"
+            android:id="@+id/cropB"
+            android:layout_width="45dp"
+            android:layout_height="45dp"/>
+
+    </LinearLayout>
+    <ImageView
+        android:id="@+id/imageDisplay"
+        android:layout_margin="10dp"
+        android:src="@color/browser_actions_bg_grey"
+        android:layout_below="@+id/cropBar"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"/>
+    <androidx.cardview.widget.CardView
+        android:layout_marginTop="30dp"
+        android:layout_centerHorizontal="true"
+        android:foreground="@drawable/ic_baseline_sends"
+        app:cardCornerRadius="50dp"
+        android:layout_below="@+id/imageDisplay"
+        android:id="@+id/sendImage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"/>
+</RelativeLayout>

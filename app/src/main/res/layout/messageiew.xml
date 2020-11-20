@@ -1,169 +1,182 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="20dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp">
 
-    >
-    <de.hdodenhof.circleimageview.CircleImageView
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/profileRec_image"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginTop="10dp"
         android:src="@drawable/ic_person"
-        app:civ_border_width="2dp"
-        app:civ_border_color="#9C27B0"/>
+        app:civ_border_color="#9C27B0"
+        app:civ_border_width="2dp" />
+
     <RelativeLayout
         android:id="@+id/rLayout"
-        android:layout_marginLeft="60dp"
-        android:background="@drawable/recieverlayout"
         android:layout_width="180dp"
-        android:layout_height="wrap_content">
-<TextView
-    android:id="@+id/msgUser"
-    android:textColor="@android:color/holo_blue_dark"
-    android:text="username"
-    android:textStyle="bold"
-    android:layout_marginLeft="3dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"/>
-    <TextView
-        android:id="@+id/msgM"
-        android:layout_marginLeft="3dp"
-        android:textColor="@android:color/black"
-        android:text="message displayed here"
-        android:layout_below="@+id/msgUser"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:layout_below="@+id/msgM"
-        android:text="date"
-        android:id="@+id/msgDate"
-        android:layout_margin="2dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-    <TextView
-        android:text="time"
-        android:layout_below="@+id/msgM"
-        android:layout_margin="2dp"
-        android:id="@+id/msgTime"
-        android:layout_alignParentRight="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:background="@drawable/recieverlayout">
+
+        <TextView
+            android:id="@+id/msgUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="username"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/msgM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msgUser"
+            android:layout_marginLeft="3dp"
+            android:text="message displayed here"
+            android:textColor="@android:color/black" />
+
+        <TextView
+            android:id="@+id/msgDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msgM"
+            android:layout_margin="2dp"
+            android:text="date" />
+
+        <TextView
+            android:id="@+id/msgTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/msgM"
+            android:layout_alignParentRight="true"
+            android:layout_margin="2dp"
+            android:text="time" />
     </RelativeLayout>
+
     <RelativeLayout
-        android:layout_toEndOf="@+id/rLayout"
         android:id="@+id/sLayout"
-        android:background="@drawable/senderlayout"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/rLayout"
         android:layout_toRightOf="@+id/rLayout"
-        android:layout_alignParentRight="true">
+        android:background="@drawable/senderlayout">
+
         <TextView
             android:id="@+id/mssgM"
-            android:textColor="@android:color/black"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="13dp"
             android:text="message displayed here"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:textColor="@android:color/black" />
+
         <TextView
-            android:layout_below="@+id/mssgM"
-            android:text="date"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="2dp"
             android:id="@+id/mssgDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:text="time"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/mssgM"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="2dp"
+            android:text="date" />
+
+        <TextView
             android:id="@+id/mssgTime"
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/mssgM"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="15dp"
+            android:text="time" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/imageRec"
-        android:layout_marginLeft="60dp"
-        android:background="@drawable/recieverlayout"
         android:layout_width="200dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:background="@drawable/recieverlayout">
 
-            <TextView
-                android:id="@+id/imgUser"
-                android:textColor="@android:color/holo_blue_dark"
-                android:text="username"
-                android:textStyle="bold"
-                android:layout_marginLeft="3dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/imgUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="username"
+            android:textColor="@android:color/holo_blue_dark"
+            android:textStyle="bold" />
+
         <ImageView
+            android:id="@+id/imgView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/imgUser"
             android:layout_margin="5dp"
-            android:id="@+id/imgView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:adjustViewBounds="true" />
 
         <TextView
-            android:layout_below="@+id/imgView"
-            android:text="date"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="2dp"
             android:id="@+id/imgDate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:text="time"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/imgView"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="2dp"
+            android:text="date" />
+
+        <TextView
             android:id="@+id/imgTime"
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgView"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="15dp"
+            android:text="time" />
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_toEndOf="@+id/rLayout"
         android:id="@+id/imgSend"
-        android:background="@drawable/senderlayout"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_toEndOf="@+id/rLayout"
         android:layout_toRightOf="@+id/imageRec"
-        android:layout_alignParentRight="true">
+        android:background="@drawable/senderlayout">
 
         <ImageView
-            android:layout_margin="5dp"
             android:id="@+id/imgSview"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:adjustViewBounds="true" />
+
         <TextView
-            android:layout_below="@+id/imgSview"
-            android:text="date"
-            android:layout_marginLeft="15dp"
-            android:layout_marginTop="2dp"
             android:id="@+id/imgSdate"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
-        <TextView
-            android:text="time"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/imgSview"
-            android:layout_marginRight="15dp"
+            android:layout_marginLeft="15dp"
             android:layout_marginTop="2dp"
+            android:text="date" />
+
+        <TextView
             android:id="@+id/imgStime"
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgSview"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginRight="15dp"
+            android:text="time" />
 
     </RelativeLayout>
 </RelativeLayout>

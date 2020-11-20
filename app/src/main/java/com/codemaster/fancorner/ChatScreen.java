@@ -32,80 +32,73 @@ public class ChatScreen extends AppCompatActivity {
     DatabaseReference db;
     TextInputEditText msgBox;
     ImageView send;
-    String currentDate,currentTime,userName;
+    String currentDate, currentTime, userName;
     RecyclerView relativeLayout;
-
-    private final List<Messages> messagesList=new ArrayList<>();
+    private final List<Messages> messagesList = new ArrayList<>();
     private LinearLayoutManager layoutManager;
     private MessageAdapter messageAdapter;
-//    @Override
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_screen);
-        msgBox=findViewById(R.id.msgbox);
-        send=findViewById(R.id.sendIm);
 
-        relativeLayout=findViewById(R.id.scrollFirst);
-        mauth=FirebaseAuth.getInstance();
+        //initialization
+        msgBox = findViewById(R.id.msgbox);
+        send = findViewById(R.id.sendIm);
+        relativeLayout = findViewById(R.id.scrollFirst);
 
-        db= FirebaseDatabase.getInstance().getReference();
-        messageAdapter=new MessageAdapter(messagesList);
-        layoutManager=new LinearLayoutManager(this);
+        mauth = FirebaseAuth.getInstance();
+
+        db = FirebaseDatabase.getInstance().getReference();
+        messageAdapter = new MessageAdapter(messagesList);
+        layoutManager = new LinearLayoutManager(this);
         relativeLayout.setLayoutManager(layoutManager);
         relativeLayout.setAdapter(messageAdapter);
-
 
         send.setOnClickListener(view -> {
             sendMessageInfo();
             msgBox.getText().clear();
-
         });
     }
 
-    private void sendMessageInfo(){
-        String message=msgBox.getText().toString();
-        String messageKey=db.child("Messages").push().getKey();
+    private void sendMessageInfo() {
+        String message = msgBox.getText().toString();
+        String messageKey = db.child("Messages").push().getKey();
 
-        if(TextUtils.isEmpty(message)){
-            Toast.makeText(getApplicationContext(),"Please write a message first",Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(message)) {
+            Toast.makeText(getApplicationContext(), "Please write a message first", Toast.LENGTH_SHORT).show();
+            return;
         }
-        else {
-
-            db.child("users").child(mauth.getUid()).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    if(snapshot.exists()){
-                        userName =snapshot.child("userName").getValue().toString();
-                    }
-                    Calendar calendar=Calendar.getInstance();
-                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("MMM dd,yyyy");
-                    currentDate=simpleDateFormat.format(calendar.getTime());
-                    Calendar calendart=Calendar.getInstance();
-                    SimpleDateFormat simpleDateFormatt=new SimpleDateFormat("hh:mm a");
-                    currentTime=simpleDateFormatt.format(calendart.getTime());
-                    HashMap<String,Object> msgKey=new HashMap<>();
-                    msgKey.put("name",userName);
-                    msgKey.put("message",message);
-                    msgKey.put("date",currentDate);
-                    msgKey.put("time",currentTime);
-                    msgKey.put("ud",mauth.getUid());
-                    msgKey.put("type","t");
-                    db.child("Messages").child(messageKey).updateChildren(msgKey);
-                    relativeLayout.smoothScrollToPosition(relativeLayout.getAdapter().getItemCount());
+        db.child("users").child(mauth.getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    userName = snapshot.child("userName").getValue().toString();
                 }
+                Calendar calendar = Calendar.getInstance();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd,yyyy");
+                currentDate = simpleDateFormat.format(calendar.getTime());
+                Calendar calendarTime = Calendar.getInstance();
+                SimpleDateFormat simpleDateFormatTime = new SimpleDateFormat("hh:mm a");
+                currentTime = simpleDateFormatTime.format(calendarTime.getTime());
+                HashMap<String, Object> msgKey = new HashMap<>();
+                msgKey.put("name", userName);
+                msgKey.put("message", message);
+                msgKey.put("date", currentDate);
+                msgKey.put("time", currentTime);
+                msgKey.put("ud", mauth.getUid());
+                msgKey.put("type", "t");
+                db.child("Messages").child(messageKey).updateChildren(msgKey);
+                relativeLayout.smoothScrollToPosition(relativeLayout.getAdapter().getItemCount());
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-
-                }
-            });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
             }
+        });
     }
-
-
-
-
 
     @Override
     protected void onStart() {
@@ -113,8 +106,8 @@ public class ChatScreen extends AppCompatActivity {
         db.child("Messages").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
-                if(snapshot.exists()){
-                    Messages messages=snapshot.getValue(Messages.class);
+                if (snapshot.exists()) {
+                    Messages messages = snapshot.getValue(Messages.class);
                     messagesList.add(messages);
                     messageAdapter.notifyDataSetChanged();
                 }
@@ -141,17 +134,17 @@ public class ChatScreen extends AppCompatActivity {
 
             }
         });
-
     }
-   private String teamCheck(String s){
 
-       final String[] teamName = new String[1];
+    private String teamCheck(String s) {
+
+        final String[] teamName = new String[1];
 
         db.child("Users").child(s).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(snapshot.exists()){
-                    teamName[0] =snapshot.child("team").getValue().toString();
+                if (snapshot.exists()) {
+                    teamName[0] = snapshot.child("team").getValue().toString();
                 }
             }
 
@@ -163,6 +156,6 @@ public class ChatScreen extends AppCompatActivity {
         return teamName[0];
 
 
-   }
+    }
 
 }

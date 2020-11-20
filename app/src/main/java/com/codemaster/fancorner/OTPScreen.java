@@ -14,6 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.codemaster.fancorner.SharedPreference.SharedPreference;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
@@ -126,6 +127,7 @@ public class OTPScreen extends AppCompatActivity {
                 if (snapshot.exists()) {
                     Log.i("here", "Already a user..");
                     Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    SharedPreference.setUserVerified(getApplicationContext(), true);
                     startActivity(mainIntent);
                 } else {
                     Log.i("here", "new user..");

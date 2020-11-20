@@ -12,6 +12,7 @@ import android.widget.Button;
 
 import com.codemaster.fancorner.SharedPreference.SharedPreference;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +27,7 @@ public class SignInScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-
+        FirebaseApp.initializeApp(this);
         //initialization
         mobileNumberTextInput = findViewById(R.id.mobileNumberTextInput);
         sendOTPBtn = findViewById(R.id.sendOtpButton);

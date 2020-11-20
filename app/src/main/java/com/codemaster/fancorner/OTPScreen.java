@@ -7,22 +7,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.chaos.view.PinView;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.TimeUnit;
 
 public class OTPScreen extends AppCompatActivity {
-
+    private DatabaseReference mDatabase;
     FirebaseAuth mAuth;
     String verificationCodeBySystem;
     String phoneNumberStr;
@@ -45,7 +52,7 @@ public class OTPScreen extends AppCompatActivity {
         //get intent values
         phoneNumberStr = getIntent().getStringExtra("PhoneNumber");
 
-        // Initialize Firebase Auth
+        //Initialize Firebase
         mAuth = FirebaseAuth.getInstance();
 
         sendVerificationCode(phoneNumberStr);
@@ -104,11 +111,33 @@ public class OTPScreen extends AppCompatActivity {
     private void signInTheUserByCredential(PhoneAuthCredential credential) {
         mAuth.signInWithCredential(credential).addOnCompleteListener(OTPScreen.this, task -> {
             if (task.isSuccessful()) {
-                Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
-                mainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(mainIntent);
+                checkExistingUser();
             } else {
                 Toast.makeText(OTPScreen.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void checkExistingUser() {
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        mDatabase.orderByChild("phone").equalTo("+917510344387").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()) {
+                    Log.i("here", "Already a user..");
+                    Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(mainIntent);
+                } else {
+                    Log.i("here", "new user..");
+                    Intent createAccountIntent = new Intent(getApplicationContext(), CreateAccountScreen.class);
+                    startActivity(createAccountIntent);
+                }
+                finish();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
     }

@@ -144,6 +144,7 @@ ProgressDialog dialog;
                                                 dialog.dismiss();
                                                 finish();
                                                 i = null;
+
                                             }
                                         }
                                     });

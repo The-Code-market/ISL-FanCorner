@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.codemaster.fancorner.model.Messages;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -24,6 +27,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     private List<Messages> messagesList;
     private FirebaseAuth mm;
     private DatabaseReference dab;
+    String teamName;
     public MessageAdapter(List<Messages> messagesList){
         this.messagesList=messagesList;
     }
@@ -41,6 +45,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         mm=FirebaseAuth.getInstance();
         dab=FirebaseDatabase.getInstance().getReference();
         String currentUserId=mm.getCurrentUser().getUid();
+
         Messages messages=messagesList.get(i);
         String chatMessage=messages.getMessage();
         String chatType=messages.getType();
@@ -72,6 +77,63 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             holder.rdate.setText(chatDate);
             holder.receiverMessage.setText(chatMessage);
 
+            dab.child("users").child(chatUid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+
+                        teamName= (String) snapshot.child("team").getValue();
+                        if(teamName.equals("Kerala Blasters")){
+                            holder.circleImageView.setImageResource(R.drawable.kerala);
+                        }
+                        else if(teamName.equals("ATK Mohun Bagan")){
+                            holder.circleImageView.setImageResource(R.drawable.atkmb);
+                        }
+                        else if(teamName.equals("Odisha")){
+                            holder.circleImageView.setImageResource(R.drawable.odisha);
+                        }
+                        else if(teamName.equals("Hyderbad")){
+                            holder.circleImageView.setImageResource(R.drawable.hyderbad);
+                        }
+                        else if(teamName.equals("Bengaluru")){
+                            holder.circleImageView.setImageResource(R.drawable.bengaluru);
+
+                        }
+                        else if(teamName.equals("Goa")){
+                            holder.circleImageView.setImageResource(R.drawable.goa);
+
+                        }
+                        else if(teamName.equals("East Bengal")){
+                            holder.circleImageView.setImageResource(R.drawable.eastbengal);
+
+                        }
+                        else if(teamName.equals("Jamshedpur")){
+                            holder.circleImageView.setImageResource(R.drawable.jamshedpur);
+
+                        }
+                        else if(teamName.equals("Chennayin")){
+                            holder.circleImageView.setImageResource(R.drawable.chennai);
+
+                        }
+                        else if(teamName.equals("Mumbai City")){
+                            holder.circleImageView.setImageResource(R.drawable.mumbai);
+
+                        }
+                        else if(teamName.equals("NorthEast United")){
+                            holder.circleImageView.setImageResource(R.drawable.northeast);
+
+                        }
+
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
         }
 
     }
@@ -100,6 +162,62 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             holder.circleImageView.setVisibility(View.VISIBLE);
             Picasso.get().load(chatMessage).into(holder.rIm);
 
+            dab.child("users").child(chatUid).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if(snapshot.exists()){
+
+                        teamName= (String) snapshot.child("team").getValue();
+                        if(teamName.equals("Kerala Blasters")){
+                            holder.circleImageView.setImageResource(R.drawable.kerala);
+                        }
+                        else if(teamName.equals("ATK Mohun Bagan")){
+                            holder.circleImageView.setImageResource(R.drawable.atkmb);
+                        }
+                        else if(teamName.equals("Odisha")){
+                            holder.circleImageView.setImageResource(R.drawable.odisha);
+                        }
+                        else if(teamName.equals("Hyderbad")){
+                            holder.circleImageView.setImageResource(R.drawable.hyderbad);
+                        }
+                        else if(teamName.equals("Bengaluru")){
+                            holder.circleImageView.setImageResource(R.drawable.bengaluru);
+
+                        }
+                        else if(teamName.equals("Goa")){
+                            holder.circleImageView.setImageResource(R.drawable.goa);
+
+                        }
+                        else if(teamName.equals("East Bengal")){
+                            holder.circleImageView.setImageResource(R.drawable.eastbengal);
+
+                        }
+                        else if(teamName.equals("Jamshedpur")){
+                            holder.circleImageView.setImageResource(R.drawable.jamshedpur);
+
+                        }
+                        else if(teamName.equals("Chennayin")){
+                            holder.circleImageView.setImageResource(R.drawable.chennai);
+
+                        }
+                        else if(teamName.equals("Mumbai City")){
+                            holder.circleImageView.setImageResource(R.drawable.mumbai);
+
+                        }
+                        else if(teamName.equals("NorthEast United")){
+                            holder.circleImageView.setImageResource(R.drawable.northeast);
+
+                        }
+
+
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
 
         }
     }

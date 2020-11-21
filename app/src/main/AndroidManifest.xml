@@ -13,8 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FanCorner">
-        <activity android:name=".PredictionResult"></activity>
-        <activity android:name=".Prediction" />
+        <activity android:name=".ChatRankScreen"></activity>
         <activity android:name=".ImageSend" />
         <activity android:name=".CreateAccountScreen" />
         <activity

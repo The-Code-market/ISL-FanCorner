@@ -9,10 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.codemaster.fancorner.Prediction;
+import com.codemaster.fancorner.ChatRankScreen;
 import com.codemaster.fancorner.R;
+import com.google.android.material.card.MaterialCardView;
 
 public class Home extends Fragment {
+    MaterialCardView chatRankCard;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,12 +23,15 @@ public class Home extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
 
+        //initialization
+        chatRankCard = view.findViewById(R.id.chatRank);
 
-        startActivity(new Intent(getContext(), Prediction.class));
-        return inflater.inflate(R.layout.fragment_home, container, false);
-
-
-
+        chatRankCard.setOnClickListener(v -> {
+            Intent chatRankIntent = new Intent(getActivity(), ChatRankScreen.class);
+            startActivity(chatRankIntent);
+        });
+        return view;
     }
 }

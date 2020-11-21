@@ -1,11 +1,9 @@
 package com.codemaster.fancorner;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -13,8 +11,6 @@ import android.widget.Toast;
 
 import com.codemaster.fancorner.SharedPreference.SharedPreference;
 import com.codemaster.fancorner.model.UserDetails;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -61,15 +57,15 @@ public class CreateAccountScreen extends AppCompatActivity {
 
     private void writeNewUser(String uid, String userName, String team, String phone) {
         UserDetails user = new UserDetails(uid, userName, team, phone);
-
         mDatabase.child("users").child(uid).setValue(user).addOnSuccessListener(aVoid -> {
             SharedPreference.setUserVerified(getApplicationContext(), true);
+            SharedPreference.setUserName(getApplicationContext(), userName);
+            SharedPreference.setUserTeam(getApplicationContext(), team);
             Intent mainIntent = new Intent(CreateAccountScreen.this, MainActivity.class);
             startActivity(mainIntent);
             finish();
         }).addOnFailureListener(e -> Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_SHORT).show());
     }
-
 
     //dropdown set up
     private void setUpDropDownTeams() {

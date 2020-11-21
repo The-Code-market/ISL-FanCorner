@@ -112,23 +112,7 @@ public class ChatScreen extends AppCompatActivity {
         relativeLayout.smoothScrollToPosition(relativeLayout.getAdapter().getItemCount());
     }
 
-    private String teamCheck(String s) {
-        final String[] teamName = new String[1];
-        db.child("Users").child(s).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    teamName[0] = snapshot.child("team").getValue().toString();
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return teamName[0];
-    }
 
     @Override
     protected void onStart() {

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.codemaster.fancorner.SharedPreference.SharedPreference;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +33,7 @@ public class Prediction extends AppCompatActivity {
     TextInputEditText team1Score,team2Score;
     CircleImageView team1Image,team2Image;
     Button submitButton,resultButton;
-    String score1,score2,match,team1Of,team2Of,dateP,timeP;
+    String score1,score2,match,team1Of,team2Of,dateP,timeP,uName,team;
     FirebaseAuth faith;
     DatabaseReference ter;
 
@@ -189,6 +190,8 @@ public class Prediction extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"Please enter scores before submitting",Toast.LENGTH_SHORT);
                 }
                 else {
+                    team= SharedPreference.getUserTeam(getApplicationContext());
+                    uName=SharedPreference.getUserName(getApplicationContext());
                     Calendar calendar = Calendar.getInstance();
                     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd,yyyy");
                     dateP = simpleDateFormat.format(calendar.getTime());
@@ -199,6 +202,8 @@ public class Prediction extends AppCompatActivity {
                     msgKey.put("score1", score1);
                     msgKey.put("score2", score2);
                     msgKey.put("date", dateP);
+                    msgKey.put("team", team);
+                    msgKey.put("name", uName);
                     msgKey.put("time", timeP);
                     msgKey.put("ud", faith.getUid());
                     ter.child("Predictions").child(faith.getUid()).updateChildren(msgKey).addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -80,6 +80,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    app:civ_border_color="#9C27B0"
+                    app:civ_border_width="2dp"
 
                     />
                 <com.google.android.material.textfield.TextInputEditText
@@ -118,6 +120,8 @@
                     android:layout_height="100dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="10dp"
+                    app:civ_border_color="#9C27B0"
+                    app:civ_border_width="2dp"
 
                     />
                 <com.google.android.material.textfield.TextInputEditText
@@ -157,6 +161,8 @@
     <Button
         android:background="@drawable/senderlayout"
         android:text="RESULT"
+        android:visibility="invisible"
+        android:layout_below="@+id/cardPredict"
         android:layout_margin="25dp"
         android:id="@+id/resultPrediction"
         android:layout_width="match_parent"

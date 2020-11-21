@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FanCorner">
-        <activity android:name=".ImageSend"></activity>
+        <activity android:name=".PredictionResult"></activity>
+        <activity android:name=".Prediction" />
+        <activity android:name=".ImageSend" />
         <activity android:name=".CreateAccountScreen" />
         <activity
             android:name=".ChatScreen"
@@ -27,7 +29,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity" android:theme="@style/Theme.AppCompat"/>
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/Theme.AppCompat" />
     </application>
 
 </manifest>

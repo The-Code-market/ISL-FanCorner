@@ -239,9 +239,5 @@ public class ChatScreen extends AppCompatActivity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
 
-    }
 }

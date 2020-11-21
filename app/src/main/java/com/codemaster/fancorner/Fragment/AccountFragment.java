@@ -54,8 +54,6 @@ public class AccountFragment extends Fragment {
             shareIntent.putExtra(Intent.EXTRA_TEXT, "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID);
             startActivity(Intent.createChooser(shareIntent, "choose one"));
         });
-
-
         return view;
     }
 }

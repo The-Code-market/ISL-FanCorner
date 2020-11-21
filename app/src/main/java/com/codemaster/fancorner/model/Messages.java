@@ -1,19 +1,19 @@
 package com.codemaster.fancorner.model;
 
 public class Messages {
-    private String message, type, ud, time, date, name;
+    private String message, type, ud, time, date, name, team;
 
-    public Messages(String date, String message, String name, String time, String type, String ud) {
-        this.date = date;
+    public Messages(String message, String type, String ud, String time, String date, String name, String team) {
         this.message = message;
-        this.name = name;
-        this.time = time;
         this.type = type;
         this.ud = ud;
+        this.time = time;
+        this.date = date;
+        this.name = name;
+        this.team = team;
     }
 
     public Messages() {
-
     }
 
     public String getMessage() {
@@ -62,5 +62,13 @@ public class Messages {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getTeam() {
+        return team;
+    }
+
+    public void setTeam(String team) {
+        this.team = team;
     }
 }

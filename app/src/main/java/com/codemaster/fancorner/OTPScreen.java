@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 import com.chaos.view.PinView;
 import com.codemaster.fancorner.SharedPreference.SharedPreference;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
@@ -30,7 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.concurrent.TimeUnit;
 
 public class OTPScreen extends AppCompatActivity {
-    private DatabaseReference mDatabase;
     FirebaseAuth mAuth;
     String verificationCodeBySystem;
     String phoneNumberStr;
@@ -120,14 +118,32 @@ public class OTPScreen extends AppCompatActivity {
     }
 
     private void checkExistingUser() {
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
-        mDatabase.orderByChild("phone").equalTo("+917510344387").addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("users");
+        mDatabase.orderByChild("phone").equalTo(phoneNumberStr).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if (snapshot.exists()) {
                     Log.i("here", "Already a user..");
                     Intent mainIntent = new Intent(getApplicationContext(), MainActivity.class);
                     SharedPreference.setUserVerified(getApplicationContext(), true);
+
+                    //getting existing user details and store in shared preference
+                    mDatabase.child(mAuth.getUid()).addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()) {
+                                String userName = snapshot.child("userName").getValue().toString();
+                                String teamName = snapshot.child("team").getValue().toString();
+                                SharedPreference.setUserName(getApplicationContext(), userName);
+                                SharedPreference.setUserTeam(getApplicationContext(), teamName);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                     startActivity(mainIntent);
                 } else {
                     Log.i("here", "new user..");

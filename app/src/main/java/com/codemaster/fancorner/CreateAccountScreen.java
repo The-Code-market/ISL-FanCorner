@@ -81,7 +81,7 @@ public class CreateAccountScreen extends AppCompatActivity {
         teamList.add("Mumbai City");
         teamList.add("Odisha");
         teamList.add("East Bengal");
-        teamList.add("Hyderaba");
+        teamList.add("Hyderabad");
         teamList.add("Jamshedpur");
         teamList.add("NorthEast United");
         ArrayAdapter<String> teamAdapter = new ArrayAdapter<>(CreateAccountScreen.this, R.layout.drop_down_item, teamList);

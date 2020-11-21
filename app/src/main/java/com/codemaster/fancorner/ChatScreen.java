@@ -60,7 +60,7 @@ public class ChatScreen extends AppCompatActivity {
     private final List<Messages> messagesList=new ArrayList<>();
     private LinearLayoutManager layoutManager;
     private MessageAdapter messageAdapter;
-//    @Override
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_screen);
@@ -219,7 +219,6 @@ public class ChatScreen extends AppCompatActivity {
         });
 
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

@@ -30,7 +30,18 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:textColor="@color/colorBlack"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:layout_marginRight="10dp"
+                android:layout_marginEnd="10dp" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/jcImage"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:src="@drawable/ic_person"
+                app:civ_border_color="#9C27B0"
+                app:civ_border_width="2dp" />
 
             <View
                 android:layout_width="0dp"

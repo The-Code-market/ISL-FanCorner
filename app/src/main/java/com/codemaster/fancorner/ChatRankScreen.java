@@ -3,12 +3,14 @@ package com.codemaster.fancorner;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
 
 import com.codemaster.fancorner.model.Messages;
+import com.codemaster.fancorner.model.TeamRank;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -17,14 +19,19 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ChatRankScreen extends AppCompatActivity {
     DatabaseReference db;
-    List<Messages> messagesList = new ArrayList<>();;
+    List<Messages> messagesList = new ArrayList<>();
+    ;
     RecyclerView rankRecyclerView;
     RankAdapter rankAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +63,26 @@ public class ChatRankScreen extends AppCompatActivity {
 
     private void calculateRank(List<Messages> messagesList) {
         HashMap<String, Integer> rankMap = new HashMap<>();
+        List<TeamRank> teamRank = new ArrayList<>();
         for (int i = 0; i < messagesList.size(); i++) {
             String teamCur = messagesList.get(i).getTeam();
             int count = rankMap.containsKey(teamCur) ? rankMap.get(teamCur) : 0;
             rankMap.put(teamCur, count + 1);
         }
-        Log.i("here hash map", rankMap.toString());
-        rankAdapter = new RankAdapter();
+        for (Map.Entry mapElement : rankMap.entrySet()) {
+            String key = (String)mapElement.getKey();
+            int value = (int)mapElement.getValue();
+            teamRank.add(new TeamRank(key, value));
+        }
+        Collections.sort(teamRank);
+        Collections.reverse(teamRank);
+        for (int i = 0; i < teamRank.size(); i++) {
+            Log.i("here hash map", teamRank.get(i).getTeam());
+            Log.i("here hash map", String.valueOf(teamRank.get(i).getRank()));
+        }
+        rankAdapter = new RankAdapter(teamRank);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        rankRecyclerView.setLayoutManager(layoutManager);
+        rankRecyclerView.setAdapter(rankAdapter);
     }
 }

@@ -207,8 +207,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                             holder.circleImageView.setImageResource(R.drawable.northeast);
 
                         }
-
-
                     }
                 }
 

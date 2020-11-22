@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.Window;
@@ -16,6 +17,12 @@ import android.widget.Toast;
 
 import com.codemaster.fancorner.SharedPreference.SharedPreference;
 import com.codemaster.fancorner.model.Messages;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.android.material.chip.ChipGroup;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,6 +49,7 @@ public class ChatScreen extends AppCompatActivity {
     RecyclerView relativeLayout;
     private final List<Messages> messagesList = new ArrayList<>();
     private MessageAdapter messageAdapter;
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +67,35 @@ public class ChatScreen extends AppCompatActivity {
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         relativeLayout.setLayoutManager(layoutManager);
         relativeLayout.setAdapter(messageAdapter);
+
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdClosed() {
+                // Load the next interstitial.
+                mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            }
+
+        });
+
+        Handler handler=new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                mInterstitialAd.show();
+                handler.postDelayed(this,60000);
+
+            }
+        },60000);
+
 
 
         send.setOnClickListener(view -> {
@@ -112,23 +149,7 @@ public class ChatScreen extends AppCompatActivity {
         relativeLayout.smoothScrollToPosition(relativeLayout.getAdapter().getItemCount());
     }
 
-    private String teamCheck(String s) {
-        final String[] teamName = new String[1];
-        db.child("Users").child(s).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if (snapshot.exists()) {
-                    teamName[0] = snapshot.child("team").getValue().toString();
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-        return teamName[0];
-    }
 
     @Override
     protected void onStart() {

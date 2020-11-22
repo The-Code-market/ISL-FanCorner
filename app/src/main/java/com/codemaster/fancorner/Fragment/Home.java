@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codemaster.fancorner.ChatRankScreen;
+import com.codemaster.fancorner.Prediction;
 import com.codemaster.fancorner.R;
 import com.google.android.material.card.MaterialCardView;
 
@@ -32,6 +33,8 @@ public class Home extends Fragment {
             Intent chatRankIntent = new Intent(getActivity(), ChatRankScreen.class);
             startActivity(chatRankIntent);
         });
+
+        startActivity(new Intent(getContext(), Prediction.class));
         return view;
     }
 }

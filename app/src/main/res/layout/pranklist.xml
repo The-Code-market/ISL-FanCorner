@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:foreground="@drawable/backcard"
+        android:layout_margin="5dp"
+        app:cardCornerRadius="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_margin="15dp"
+                android:src="@drawable/kerala"
+                android:layout_width="70dp"
+                android:id="@+id/rankPIm"
+                app:civ_border_color="#9C27B0"
+                app:civ_border_width="2dp"
+                android:layout_height="70dp"/>
+
+            <TextView
+                android:layout_margin="10dp"
+                android:layout_toEndOf="@+id/rankPIm"
+                android:textColor="#5609DF"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:text="user"
+                android:id="@+id/rankPUser"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/rankPIm" />
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>

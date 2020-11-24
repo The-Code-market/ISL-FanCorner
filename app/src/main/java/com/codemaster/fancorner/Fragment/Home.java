@@ -33,8 +33,6 @@ public class Home extends Fragment {
             Intent chatRankIntent = new Intent(getActivity(), ChatRankScreen.class);
             startActivity(chatRankIntent);
         });
-
-        startActivity(new Intent(getContext(), Prediction.class));
         return view;
     }
 }

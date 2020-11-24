@@ -62,27 +62,22 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
         team2Image = findViewById(R.id.team2Image);
         submitButton = findViewById(R.id.submitPrediction);
         resultButton = findViewById(R.id.resultPrediction);
+
         alertDialog = new AlertDialog.Builder(Prediction.this).setTitle("Confirmation")
                 .setMessage("Watch a video to confirm ,do you want to continue?")
                 .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        if(mRewardedVideoAd.isLoaded()){
+                        if (mRewardedVideoAd.isLoaded()) {
                             mRewardedVideoAd.show();
-                        }
-                        else {
+                        } else {
                             loadRewardedVideoAd();
                             mRewardedVideoAd.show();
                         }
 
                     }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        alertDialog.dismiss();
-                    }
-                })
+                }).setNegativeButton("Cancel", (dialog, which) -> alertDialog.dismiss())
                 .create();
 
 
@@ -203,10 +198,9 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
                 if (team1Score.getText().toString().isEmpty() || team2Score.getText().toString().isEmpty()) {
 
                     Toast.makeText(getApplicationContext(), "Please enter scores before submitting", Toast.LENGTH_SHORT);
-                }
-                else {
+                } else {
 
-                alertDialog.show();
+                    alertDialog.show();
                     alertDialog.getButton(alertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRed));
                     alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRedDark));
 
@@ -214,101 +208,90 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
             }
 
         });
+        resultButton.setOnClickListener(v -> startActivity(new Intent(Prediction.this, PredictionResult.class)));
+    }
 
-                resultButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        startActivity(new Intent(Prediction.this, PredictionResult.class));
-                    }
-                });
+    private void loadRewardedVideoAd() {
+        mRewardedVideoAd.loadAd("ca-app-pub-9651810996916771/3241832746", new AdRequest.Builder().build());
+    }
 
-           }
-        private void loadRewardedVideoAd() {
-            mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917",
-                    new AdRequest.Builder().build());
-        }
+    @Override
+    public void onRewardedVideoAdLoaded() {
 
-            @Override
-            public void onRewardedVideoAdLoaded() {
+    }
 
-            }
+    @Override
+    public void onRewardedVideoAdOpened() {
 
-            @Override
-            public void onRewardedVideoAdOpened() {
+    }
 
-            }
+    @Override
+    public void onRewardedVideoStarted() {
 
-            @Override
-            public void onRewardedVideoStarted() {
+    }
 
-            }
+    @Override
+    public void onRewardedVideoAdClosed() {
+        loadRewardedVideoAd();
 
-            @Override
-            public void onRewardedVideoAdClosed() {
-                loadRewardedVideoAd();
+    }
 
-            }
+    @Override
+    public void onRewarded(RewardItem rewardItem) {
 
-            @Override
-            public void onRewarded(RewardItem rewardItem) {
+    }
 
-            }
+    @Override
+    public void onRewardedVideoAdLeftApplication() {
 
-            @Override
-            public void onRewardedVideoAdLeftApplication() {
+    }
 
-            }
+    @Override
+    public void onRewardedVideoAdFailedToLoad(int i) {
 
-            @Override
-            public void onRewardedVideoAdFailedToLoad(int i) {
+    }
 
-            }
-
-            @Override
-            public void onRewardedVideoCompleted() {
+    @Override
+    public void onRewardedVideoCompleted() {
 
 
-                score1 = team1Score.getText().toString();
-                score2 = team2Score.getText().toString();
+        score1 = team1Score.getText().toString();
+        score2 = team2Score.getText().toString();
 
-                if (score1.isEmpty() || score2.isEmpty()) {
+        if (score1.isEmpty() || score2.isEmpty()) {
 
-                    Toast.makeText(getApplicationContext(), "Please enter scores before submitting", Toast.LENGTH_SHORT);
-                } else {
-                    team = SharedPreference.getUserTeam(getApplicationContext());
-                    uName = SharedPreference.getUserName(getApplicationContext());
-                    Calendar calendar = Calendar.getInstance();
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd,yyyy");
-                    dateP = simpleDateFormat.format(calendar.getTime());
-                    Calendar calendart = Calendar.getInstance();
-                    SimpleDateFormat simpleDateFormatt = new SimpleDateFormat("hh:mm a");
-                    timeP = simpleDateFormatt.format(calendart.getTime());
-                    HashMap<String, Object> msgKey = new HashMap<>();
-                    msgKey.put("score1", score1);
-                    msgKey.put("score2", score2);
-                    msgKey.put("date", dateP);
-                    msgKey.put("team", team);
-                    msgKey.put("name", uName);
-                    msgKey.put("time", timeP);
-                    msgKey.put("ud", faith.getUid());
-                    ter.child("Predictions").child(faith.getUid()).updateChildren(msgKey).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
+            Toast.makeText(getApplicationContext(), "Please enter scores before submitting", Toast.LENGTH_SHORT);
+        } else {
+            team = SharedPreference.getUserTeam(getApplicationContext());
+            uName = SharedPreference.getUserName(getApplicationContext());
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd,yyyy");
+            dateP = simpleDateFormat.format(calendar.getTime());
+            Calendar calendart = Calendar.getInstance();
+            SimpleDateFormat simpleDateFormatt = new SimpleDateFormat("hh:mm a");
+            timeP = simpleDateFormatt.format(calendart.getTime());
+            HashMap<String, Object> msgKey = new HashMap<>();
+            msgKey.put("score1", score1);
+            msgKey.put("score2", score2);
+            msgKey.put("date", dateP);
+            msgKey.put("team", team);
+            msgKey.put("name", uName);
+            msgKey.put("time", timeP);
+            msgKey.put("ud", faith.getUid());
+            ter.child("Predictions").child(faith.getUid()).updateChildren(msgKey).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void aVoid) {
 
-                            submitButton.setVisibility(View.GONE);
-                            team1Score.setVisibility(View.GONE);
-                            team2Score.setVisibility(View.GONE);
+                    submitButton.setVisibility(View.GONE);
+                    team1Score.setVisibility(View.GONE);
+                    team2Score.setVisibility(View.GONE);
 
-                            Toast.makeText(getApplicationContext(), "Submitted successfully", Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(), "Submitted successfully", Toast.LENGTH_SHORT);
 
-                        }
-                    });
                 }
-            }
-
-
-
-
+            });
+        }
+    }
 
 
     @Override
@@ -328,8 +311,6 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
         mRewardedVideoAd.destroy(this);
         super.onDestroy();
     }
-
-
 
 
 }

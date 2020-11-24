@@ -13,11 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FanCorner">
-        <activity android:name=".ChatRankScreen"></activity>
+        <activity android:name=".PersonalInfoEdit"></activity>
+        <activity android:name=".ChatRankScreen" />
         <activity android:name=".ImageSend" />
         <activity android:name=".CreateAccountScreen" />
-        <activity android:name=".Prediction"/>
-        <activity android:name=".PredictionResult"/>
+        <activity android:name=".Prediction" />
+        <activity android:name=".PredictionResult" />
         <activity
             android:name=".ChatScreen"
             android:theme="@style/Theme.FanCorner.RedStatusBar" />
@@ -34,11 +35,9 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Theme.AppCompat" />
 
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-3940256099942544~3347511713"/>
-
+            android:value="ca-app-pub-3940256099942544~3347511713" />
     </application>
 
 </manifest>

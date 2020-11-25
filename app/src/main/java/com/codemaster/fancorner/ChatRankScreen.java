@@ -74,7 +74,6 @@ public class ChatRankScreen extends AppCompatActivity {
             teamRank.add(new TeamRank(key, value));
         }
         Collections.sort(teamRank);
-        Collections.reverse(teamRank);
         for (int i = 0; i < teamRank.size(); i++) {
             Log.i("here hash map", teamRank.get(i).getTeam());
             Log.i("here hash map", String.valueOf(teamRank.get(i).getRank()));

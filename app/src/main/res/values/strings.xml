@@ -39,7 +39,7 @@
     <string name="title_activity_fullscreen">FullscreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="update">Update</string>
-    <string name="personal_info_edit">Personal Info</string>
+    <string name="personal_info_edit">Personal Info Edit</string>
     <string name="edit_your_account_details">Edit your account details</string>
+    <string name="update">update</string>
 </resources>

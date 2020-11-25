@@ -2,10 +2,13 @@ package com.codemaster.fancorner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -31,6 +34,8 @@ public class PredictionResult extends AppCompatActivity {
     DatabaseReference dt;
     private final List<RankPredictModel> rankList = new ArrayList<>();
     private PredictRankAdapter adapter;
+    @SuppressLint("ResourceAsColor")
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +45,7 @@ public class PredictionResult extends AppCompatActivity {
         adapter = new PredictRankAdapter(rankList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rankCycle.setLayoutManager(layoutManager);
+        getWindow().setStatusBarColor(R.color.light_blue_900);
         rankCycle.setAdapter(adapter);
         dt= FirebaseDatabase.getInstance().getReference();
         mit=FirebaseAuth.getInstance();

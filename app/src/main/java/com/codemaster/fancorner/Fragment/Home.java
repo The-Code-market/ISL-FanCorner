@@ -15,7 +15,7 @@ import com.codemaster.fancorner.R;
 import com.google.android.material.card.MaterialCardView;
 
 public class Home extends Fragment {
-    MaterialCardView chatRankCard;
+    MaterialCardView chatRankCard,fixture,predictor;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,13 +28,22 @@ public class Home extends Fragment {
 
         //initialization
         chatRankCard = view.findViewById(R.id.chatRank);
+        fixture = view.findViewById(R.id.fixture);
+        predictor = view.findViewById(R.id.predictionCard);
+
 
         chatRankCard.setOnClickListener(v -> {
             Intent chatRankIntent = new Intent(getActivity(), ChatRankScreen.class);
             startActivity(chatRankIntent);
         });
+        predictor.setOnClickListener(v->{
 
-        startActivity(new Intent(getContext(), Prediction.class));
+            Intent p = new Intent(getActivity(), Prediction.class);
+            startActivity(p);
+
+        });
+
+
         return view;
     }
 }

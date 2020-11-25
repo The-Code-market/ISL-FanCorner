@@ -36,4 +36,7 @@
     <string name="fixture">Fixture</string>
     <string name="chat_ranking">Chat Ranking</string>
     <string name="ranking_of_team_based_on_number_of_chats_per_day">Ranking of team based on number of chats per day</string>
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

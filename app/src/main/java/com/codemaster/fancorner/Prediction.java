@@ -1,12 +1,15 @@
 package com.codemaster.fancorner;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -47,12 +50,15 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
     private RewardedVideoAd mRewardedVideoAd;
     AlertDialog alertDialog;
 
+    @SuppressLint("ResourceAsColor")
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_prediction);
         faith = FirebaseAuth.getInstance();
         ter = FirebaseDatabase.getInstance().getReference();
+        getWindow().setStatusBarColor(R.color.light_blue_900);
         team1 = findViewById(R.id.team1Name);
         team2 = findViewById(R.id.team2Name);
         matchNo = findViewById(R.id.matchNo);
@@ -176,7 +182,27 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
                             team1Score.setVisibility(View.GONE);
                             team2Score.setVisibility(View.GONE);
                             resultButton.setVisibility(View.VISIBLE);
-                            Toast.makeText(getApplicationContext(), "Prediction time expired", Toast.LENGTH_LONG).show();
+                            Toast.makeText(getApplicationContext(), "You have already submitted", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+                ter.child("Expiry").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if (snapshot.exists()) {
+                            submitButton.setVisibility(View.GONE);
+                            team1Score.setVisibility(View.GONE);
+                            team2Score.setVisibility(View.GONE);
+                            resultButton.setVisibility(View.VISIBLE);
+                            Toast.makeText(getApplicationContext(), "Time expired", Toast.LENGTH_LONG).show();
                         }
 
                     }

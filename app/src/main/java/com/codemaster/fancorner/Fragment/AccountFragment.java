@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.codemaster.fancorner.BuildConfig;
 import com.codemaster.fancorner.CreateAccountScreen;
 import com.codemaster.fancorner.MainActivity;
+import com.codemaster.fancorner.PersonalInfoEdit;
 import com.codemaster.fancorner.R;
 import com.google.firebase.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
@@ -42,6 +43,10 @@ public class AccountFragment extends Fragment {
         shareCard = view.findViewById(R.id.shareCard);
         rateFeedBackCard = view.findViewById(R.id.rateFeedBackCard);
 
+        personalInfoCard.setOnClickListener(v -> {
+            Intent personalInfoIntent = new Intent(getActivity(), PersonalInfoEdit.class);
+            startActivity(personalInfoIntent);
+        });
         rateFeedBackCard.setOnClickListener(v -> {
             Intent rateIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID));
             startActivity(rateIntent);

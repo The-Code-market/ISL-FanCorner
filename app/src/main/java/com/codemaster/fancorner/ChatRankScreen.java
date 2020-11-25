@@ -28,7 +28,6 @@ import java.util.Map;
 public class ChatRankScreen extends AppCompatActivity {
     DatabaseReference db;
     List<Messages> messagesList = new ArrayList<>();
-    ;
     RecyclerView rankRecyclerView;
     RankAdapter rankAdapter;
 

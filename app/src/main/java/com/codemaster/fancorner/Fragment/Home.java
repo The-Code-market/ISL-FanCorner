@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codemaster.fancorner.ChatRankScreen;
+import com.codemaster.fancorner.Fixture;
 import com.codemaster.fancorner.Prediction;
 import com.codemaster.fancorner.R;
 import com.google.android.material.card.MaterialCardView;
@@ -42,6 +43,13 @@ public class Home extends Fragment {
             startActivity(p);
 
         });
+        fixture.setOnClickListener(v->{
+
+            Intent f = new Intent(getActivity(), Fixture.class);
+            startActivity(f);
+
+        });
+
 
 
         return view;

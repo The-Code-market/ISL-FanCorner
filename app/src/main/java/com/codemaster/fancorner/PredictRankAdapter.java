@@ -105,9 +105,7 @@ public class PredictRankAdapter extends RecyclerView.Adapter<PredictRankAdapter.
 
                     }
                 }
-                else {
 
-                }
 
             }
 

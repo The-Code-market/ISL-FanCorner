@@ -9,9 +9,63 @@
     tools:context=".Fragment.Home">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/predictionCard"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        app:cardBackgroundColor="@color/colorGreyLight"
+        app:strokeColor="@color/colorRed"
+        app:strokeWidth="1dp"
+
+        android:layout_marginVertical="30dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"
+                android:paddingHorizontal="20dp"
+                android:paddingVertical="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Score Prediction"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/ic_arrow_right"
+                    app:tint="@color/colorBlack"
+                    tools:ignore="ContentDescription" />
+            </LinearLayout>
+
+            <View style="@style/Divider" />
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/fixture"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:layout_below="@+id/predictionCard"
         android:theme="@style/Theme.MaterialComponents.Light"
         app:cardBackgroundColor="@color/colorGreyLight"
         app:strokeColor="@color/colorRed"

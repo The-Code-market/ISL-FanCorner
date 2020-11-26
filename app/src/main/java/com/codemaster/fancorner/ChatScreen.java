@@ -84,7 +84,7 @@ public class ChatScreen extends AppCompatActivity {
             @Override
             public void run() {
                 mInterstitialAd.show();
-                handler.postDelayed(this,60000);
+                handler.postDelayed(this,180000);
             }
         },60000);
 

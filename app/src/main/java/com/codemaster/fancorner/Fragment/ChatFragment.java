@@ -15,32 +15,14 @@ import com.codemaster.fancorner.R;
 
 
 public class ChatFragment extends Fragment {
-
-
     RelativeLayout rL;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-
-        startActivity(new Intent(getContext(),ChatScreen.class));
-        
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view= inflater.inflate(R.layout.fragment_chat, container, false);
-        rL=view.findViewById(R.id.chatFrag);
-        rL.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(),ChatScreen.class));
-            }
-        });
-                return view;
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        rL = view.findViewById(R.id.chatFrag);
+        rL.setOnClickListener(v -> startActivity(new Intent(getContext(), ChatScreen.class)));
+        return view;
     }
 }

@@ -31,6 +31,7 @@
                     android:layout_height="80dp"
                     android:layout_marginHorizontal="20dp"
                     android:contentDescription="@string/profile_image"
+                    android:padding="5dp"
                     android:src="@drawable/logoapp" />
 
                 <LinearLayout
@@ -147,6 +148,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
+            android:id="@+id/getHelp"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:theme="@style/Theme.MaterialComponents.Light"

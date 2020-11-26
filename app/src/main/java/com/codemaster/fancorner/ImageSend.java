@@ -1,12 +1,15 @@
 package com.codemaster.fancorner;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -36,6 +39,8 @@ public class ImageSend extends AppCompatActivity {
     String currentDate1, currentTime1, downloadUrl;
     ProgressDialog dialog;
 
+    @SuppressLint("ResourceAsColor")
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,7 @@ public class ImageSend extends AppCompatActivity {
         cropB.setOnClickListener(v -> startCropImageActivity(imageUri));
         imageDis.setImageURI(imageUri);
         sendIm.setOnClickListener(v -> sendMessageImInfo());
+        getWindow().setStatusBarColor(R.color.imseb);
     }
 
     private void startCropImageActivity(Uri imageUri) {
@@ -106,8 +112,14 @@ public class ImageSend extends AppCompatActivity {
 
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data);
-            i = result.getUri();
-            imageDis.setImageURI(i);
+            try {
+                i = result.getUri();
+                imageDis.setImageURI(i);
+            } catch (Exception e) {
+
+            }
+
+
         }
     }
 }

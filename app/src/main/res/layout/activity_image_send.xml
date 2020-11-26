@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1D371E"
     tools:context=".ImageSend">
     <LinearLayout
         android:id="@+id/cropBar"
@@ -27,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="600dp"/>
     <androidx.cardview.widget.CardView
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="15dp"
         android:layout_centerHorizontal="true"
         android:foreground="@drawable/ic_baseline_sends"
         app:cardCornerRadius="50dp"

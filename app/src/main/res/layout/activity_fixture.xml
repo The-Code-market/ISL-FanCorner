@@ -6,37 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".Fixture">
 
-        <ScrollView
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
+
+    <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <RelativeLayout
                 android:scrollbars="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/fix1"
-                    android:scaleType="matrix"
-                    android:src="@drawable/fix1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <ImageView
-                    android:layout_below="@id/fix1"
-                    android:id="@+id/fix2"
-                    android:scaleType="matrix"
-                    android:src="@drawable/fix2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
-                <ImageView
-                    android:layout_below="@id/fix2"
-                    android:scaleType="matrix"
-                    android:src="@drawable/fix3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                        <ImageView
+                            android:id="@+id/fix1"
+                            android:scaleType="matrix"
+                            android:src="@drawable/fix1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <ImageView
+                            android:layout_below="@id/fix1"
+                            android:id="@+id/fix2"
+                            android:scaleType="matrix"
+                            android:src="@drawable/fix2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+                        <ImageView
+                            android:layout_below="@id/fix2"
+                            android:scaleType="matrix"
+                            android:src="@drawable/fix3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
 
             </RelativeLayout>
         </ScrollView>
+    </HorizontalScrollView>
 
 </RelativeLayout>

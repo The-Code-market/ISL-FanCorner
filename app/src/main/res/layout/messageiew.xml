@@ -26,7 +26,7 @@
             android:id="@+id/msgUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="4dp"
             android:text="username"
             android:textColor="@android:color/holo_blue_dark"
             android:textStyle="bold" />
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/msgUser"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="4dp"
             android:text="message displayed here"
             android:textColor="@android:color/black" />
 
@@ -108,7 +108,7 @@
             android:id="@+id/imgUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="4dp"
             android:text="username"
             android:textColor="@android:color/holo_blue_dark"
             android:textStyle="bold" />

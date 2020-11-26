@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import com.codemaster.fancorner.model.Messages;
 import com.codemaster.fancorner.model.RankPredictModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;

@@ -20,6 +20,7 @@ import com.codemaster.fancorner.CreateAccountScreen;
 import com.codemaster.fancorner.MainActivity;
 import com.codemaster.fancorner.PersonalInfoEdit;
 import com.codemaster.fancorner.R;
+import com.codemaster.fancorner.SharedPreference.SharedPreference;
 import com.google.firebase.FirebaseError;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,7 +31,6 @@ import com.google.firebase.database.ValueEventListener;
 public class AccountFragment extends Fragment {
     CardView personalInfoCard, shareCard, rateFeedBackCard;
     TextView userNameText, logoutText, roleText;
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account, container, false);
@@ -42,6 +42,9 @@ public class AccountFragment extends Fragment {
         personalInfoCard = view.findViewById(R.id.personalInfo);
         shareCard = view.findViewById(R.id.shareCard);
         rateFeedBackCard = view.findViewById(R.id.rateFeedBackCard);
+
+        userNameText.setText(SharedPreference.getUserName(getContext()));
+        roleText.setText(SharedPreference.getUserTeam(getContext()));
 
         personalInfoCard.setOnClickListener(v -> {
             Intent personalInfoIntent = new Intent(getActivity(), PersonalInfoEdit.class);

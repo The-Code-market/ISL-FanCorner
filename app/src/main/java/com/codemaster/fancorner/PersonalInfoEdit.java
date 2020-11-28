@@ -3,6 +3,8 @@ package com.codemaster.fancorner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -26,6 +28,7 @@ public class PersonalInfoEdit extends AppCompatActivity {
     Button createAccountBtn;
     TextInputEditText userNameText;
     String uid, userName, team;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,13 @@ public class PersonalInfoEdit extends AppCompatActivity {
 
         setUpDropDownTeams();
 
+        //load the current team and name
+        userNameText.setText(SharedPreference.getUserName(getApplicationContext()));
+        teamDropDown.setText(SharedPreference.getUserTeam(getApplicationContext()));
+
+        //onclick team dropdown
+        teamDropDown.setOnClickListener(v -> teamDropDown.getText().clear());
+
         //Initialize Firebase
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -45,6 +55,14 @@ public class PersonalInfoEdit extends AppCompatActivity {
             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             if (currentFirebaseUser != null) {
                 uid = currentFirebaseUser.getUid();
+            }
+            if (userNameText.getText().toString().equals("") || teamDropDown.getText().toString().equals("")) {
+                Toast.makeText(getApplicationContext(), "Enter valid details", Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (!teamList.contains(teamDropDown.getText().toString())){
+                Toast.makeText(getApplicationContext(), "Select team from the given list", Toast.LENGTH_SHORT).show();
+                return;
             }
             userName = userNameText.getText().toString();
             team = teamDropDown.getText().toString();

@@ -29,9 +29,14 @@
     <string name="create">create</string>
     <string name="fixture">Fixture</string>
     <string name="chat_ranking">Chat Ranking</string>
-    <string name="ranking_of_team_based_on_number_of_chats_per_day">Ranking of team based on number of chats per day</string>
+    <string name="ranking_of_team_based_on_number_of_chats_per_day">Ranking of team based on fans online presence</string>
     <string name="personal_info_edit">Personal Info Edit</string>
     <string name="edit_your_account_details">Edit your account details</string>
     <string name="update">update</string>
     <string name="welcomeText">12th Man</string>
+    <string name="team_ranking">Team Ranking</string>
+    <string name="predictionStartSoon">Prediction Will Start Soon</string>
+    <string name="predict_the_winner">PREDICT THE WINNER</string>
+    <string name="match">Match :</string>
+    <string name="_0">0</string>
 </resources>

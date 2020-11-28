@@ -12,9 +12,9 @@
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:textStyle="bold"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textColor="#FFFDFC"
-        android:text="PREDICT THE WINNER"
+        android:text="@string/predict_the_winner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -33,26 +33,29 @@
             <TextView
                 android:id="@+id/matchRep"
                 android:textStyle="bold"
-                android:text="Match :"
-                android:textSize="25sp"
-                android:layout_marginRight="3dp"
-                android:layout_centerHorizontal="true"
-                android:textColor="#3F51B5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
-            <TextView
-                android:layout_toEndOf="@+id/matchRep"
-                android:id="@+id/matchNo"
-                android:textStyle="bold"
-                android:layout_marginLeft="2dp"
-                android:text="0"
+                android:text="@string/match"
                 android:textSize="25sp"
                 android:layout_marginRight="3dp"
                 android:layout_centerHorizontal="true"
                 android:textColor="#3F51B5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/matchRep" />
+                android:layout_marginEnd="3dp" />
+            <TextView
+                android:layout_toEndOf="@+id/matchRep"
+                android:id="@+id/matchNo"
+                android:textStyle="bold"
+                android:layout_marginLeft="2dp"
+                android:text="@string/_0"
+                android:textSize="25sp"
+                android:layout_marginRight="3dp"
+                android:layout_centerHorizontal="true"
+                android:textColor="#3F51B5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/matchRep"
+                android:layout_marginStart="2dp"
+                android:layout_marginEnd="3dp" />
             <RelativeLayout
                 android:layout_marginLeft="10dp"
                 android:layout_centerInParent="true"

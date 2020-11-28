@@ -39,7 +39,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Prediction extends AppCompatActivity implements RewardedVideoAdListener {
 
-    TextView team1, team2, matchNo;
+    TextView team1, team2, matchNo, headingText;
     TextInputEditText team1Score, team2Score;
     CircleImageView team1Image, team2Image;
     Button submitButton, resultButton;
@@ -67,21 +67,19 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
         team2Image = findViewById(R.id.team2Image);
         submitButton = findViewById(R.id.submitPrediction);
         resultButton = findViewById(R.id.resultPrediction);
+        headingText = findViewById(R.id.textSample);
 
         alertDialog = new AlertDialog.Builder(Prediction.this).setTitle("Confirmation")
                 .setMessage("Watch a video to confirm ,do you want to continue?")
-                .setPositiveButton("Continue", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                .setPositiveButton("Continue", (dialog, which) -> {
 
-                        if (mRewardedVideoAd.isLoaded()) {
-                            mRewardedVideoAd.show();
-                        } else {
-                            loadRewardedVideoAd();
-                            mRewardedVideoAd.show();
-                        }
-
+                    if (mRewardedVideoAd.isLoaded()) {
+                        mRewardedVideoAd.show();
+                    } else {
+                        loadRewardedVideoAd();
+                        mRewardedVideoAd.show();
                     }
+
                 }).setNegativeButton("Cancel", (dialog, which) -> alertDialog.dismiss())
                 .create();
 
@@ -109,7 +107,7 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
                         team1Image.setImageResource(R.drawable.atkmb);
                     } else if (team1Of.equals("Odisha")) {
                         team1Image.setImageResource(R.drawable.odisha);
-                    } else if (team1Of.equals("Hyderbad")) {
+                    } else if (team1Of.equals("Hyderabad")) {
                         team1Image.setImageResource(R.drawable.hyderbad);
                     } else if (team1Of.equals("Bengaluru")) {
                         team1Image.setImageResource(R.drawable.bengaluru);
@@ -167,6 +165,20 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
                     }
 
                 }
+                else {
+                    team1.setVisibility(View.GONE);
+                    team2.setVisibility(View.GONE);
+                    matchNo.setVisibility(View.GONE);
+                    team1Score.setVisibility(View.GONE);
+                    team2Score.setVisibility(View.GONE);
+                    team1Image.setVisibility(View.GONE);
+                    team2Image.setVisibility(View.GONE);
+                    submitButton.setVisibility(View.GONE);
+                    resultButton.setVisibility(View.GONE);
+
+                    headingText.getText().getClass();
+                    headingText.setText(R.string.predictionStartSoon);
+                }
                 ter.child("Predictions").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -178,7 +190,6 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
                             resultButton.setVisibility(View.VISIBLE);
                             Toast.makeText(getApplicationContext(), "You have already submitted", Toast.LENGTH_LONG).show();
                         }
-
                     }
 
                     @Override
@@ -203,10 +214,8 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
                     }
                 });
-
             }
 
             @Override
@@ -216,22 +225,18 @@ public class Prediction extends AppCompatActivity implements RewardedVideoAdList
         });
 
 
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        submitButton.setOnClickListener(v -> {
 
-                if (team1Score.getText().toString().isEmpty() || team2Score.getText().toString().isEmpty()) {
+            if (team1Score.getText().toString().isEmpty() || team2Score.getText().toString().isEmpty()) {
 
-                    Toast.makeText(getApplicationContext(), "Please enter scores before submitting", Toast.LENGTH_SHORT);
-                } else {
+                Toast.makeText(getApplicationContext(), "Please enter scores before submitting", Toast.LENGTH_SHORT).show();
+            } else {
 
-                    alertDialog.show();
-                    alertDialog.getButton(alertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRed));
-                    alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRedDark));
+                alertDialog.show();
+                alertDialog.getButton(alertDialog.BUTTON_NEGATIVE).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRed));
+                alertDialog.getButton(alertDialog.BUTTON_POSITIVE).setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorRedDark));
 
-                }
             }
-
         });
         resultButton.setOnClickListener(v -> startActivity(new Intent(Prediction.this, PredictionResult.class)));
     }

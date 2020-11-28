@@ -7,10 +7,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.TextUtils;
 import android.view.Gravity;
+import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -57,6 +59,7 @@ public class ChatScreen extends AppCompatActivity {
         send = findViewById(R.id.sendIm);
         relativeLayout = findViewById(R.id.scrollFirst);
         attach = findViewById(R.id.attachFile);
+
         mAuth = FirebaseAuth.getInstance();
 
         db = FirebaseDatabase.getInstance().getReference();
@@ -84,7 +87,7 @@ public class ChatScreen extends AppCompatActivity {
             @Override
             public void run() {
                 mInterstitialAd.show();
-                handler.postDelayed(this,180000);
+                handler.postDelayed(this,120000);
             }
         },60000);
 
@@ -117,6 +120,8 @@ public class ChatScreen extends AppCompatActivity {
 
             });
         });
+
+
     }
 
     private void sendMessageInfo() {

@@ -31,10 +31,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class AccountFragment extends Fragment {
     CardView personalInfoCard, shareCard, rateFeedBackCard, getHelpCard;
     TextView userNameText, logoutText, roleText;
-    ImageView profileImg;
+    CircleImageView profileImg;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

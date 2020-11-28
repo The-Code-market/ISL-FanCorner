@@ -88,7 +88,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                                 holder.circleImageView.setImageResource(R.drawable.atkmb);
                             } else if (teamName.equals("Odisha")) {
                                 holder.circleImageView.setImageResource(R.drawable.odisha);
-                            } else if (teamName.equals("Hyderbad")) {
+                            } else if (teamName.equals("Hyderabad")) {
                                 holder.circleImageView.setImageResource(R.drawable.hyderbad);
                             } else if (teamName.equals("Bengaluru")) {
                                 holder.circleImageView.setImageResource(R.drawable.bengaluru);
@@ -152,7 +152,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
                                 holder.circleImageView.setImageResource(R.drawable.atkmb);
                             } else if (teamName.equals("Odisha")) {
                                 holder.circleImageView.setImageResource(R.drawable.odisha);
-                            } else if (teamName.equals("Hyderbad")) {
+                            } else if (teamName.equals("Hyderabad")) {
                                 holder.circleImageView.setImageResource(R.drawable.hyderbad);
                             } else if (teamName.equals("Bengaluru")) {
                                 holder.circleImageView.setImageResource(R.drawable.bengaluru);

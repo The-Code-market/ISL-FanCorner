@@ -17,6 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +41,7 @@ public class ChatRankScreen extends AppCompatActivity {
     }
 
     public void getChat() {
-        db.child("Messages").addValueEventListener(new ValueEventListener() {
+        db.child("Messages").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot childSnapshot : snapshot.getChildren()) {
@@ -71,10 +72,6 @@ public class ChatRankScreen extends AppCompatActivity {
             teamRank.add(new TeamRank(key, value));
         }
         Collections.sort(teamRank);
-        for (int i = 0; i < teamRank.size(); i++) {
-            Log.i("here hash map", teamRank.get(i).getTeam());
-            Log.i("here hash map", String.valueOf(teamRank.get(i).getRank()));
-        }
         rankAdapter = new RankAdapter(teamRank);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rankRecyclerView.setLayoutManager(layoutManager);

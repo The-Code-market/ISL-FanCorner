@@ -54,6 +54,9 @@ public class ChatScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_screen);
 
+        //load chat
+        loadChat();
+
         //initialisation
         msgBox = findViewById(R.id.msgbox);
         send = findViewById(R.id.sendIm);
@@ -144,11 +147,7 @@ public class ChatScreen extends AppCompatActivity {
         relativeLayout.smoothScrollToPosition(relativeLayout.getAdapter().getItemCount());
     }
 
-
-
-    @Override
-    protected void onStart() {
-        super.onStart();
+    public void loadChat(){
         db.child("Messages").addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {

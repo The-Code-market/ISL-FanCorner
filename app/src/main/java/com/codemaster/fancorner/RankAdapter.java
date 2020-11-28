@@ -47,7 +47,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.ViewHolder> {
             case "Odisha":
                 holder.circleImageView.setImageResource(R.drawable.odisha);
                 break;
-            case "Hyderbad":
+            case "Hyderabad":
                 holder.circleImageView.setImageResource(R.drawable.hyderbad);
                 break;
             case "Bengaluru":

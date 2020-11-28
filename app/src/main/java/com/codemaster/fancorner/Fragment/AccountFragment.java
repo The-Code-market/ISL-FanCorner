@@ -52,6 +52,7 @@ public class AccountFragment extends Fragment {
         getHelpCard = view.findViewById(R.id.getHelp);
         profileImg = view.findViewById(R.id.profilePic);
 
+        // value load
         userNameText.setText(SharedPreference.getUserName(getContext()));
         roleText.setText(SharedPreference.getUserTeam(getContext()));
 
@@ -67,7 +68,7 @@ public class AccountFragment extends Fragment {
             case "Odisha":
                 profileImg.setImageResource(R.drawable.odisha);
                 break;
-            case "Hyderbad":
+            case "Hyderabad":
                 profileImg.setImageResource(R.drawable.hyderbad);
                 break;
             case "Bengaluru":
@@ -128,5 +129,51 @@ public class AccountFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // value load
+        userNameText.setText(SharedPreference.getUserName(getContext()));
+        roleText.setText(SharedPreference.getUserTeam(getContext()));
+
+        // profile image setting
+        String teamName = SharedPreference.getUserTeam(getContext());
+        switch (teamName) {
+            case "Kerala Blasters":
+                profileImg.setImageResource(R.drawable.kerala);
+                break;
+            case "ATK Mohun Bagan":
+                profileImg.setImageResource(R.drawable.atkmb);
+                break;
+            case "Odisha":
+                profileImg.setImageResource(R.drawable.odisha);
+                break;
+            case "Hyderabad":
+                profileImg.setImageResource(R.drawable.hyderbad);
+                break;
+            case "Bengaluru":
+                profileImg.setImageResource(R.drawable.bengaluru);
+                break;
+            case "Goa":
+                profileImg.setImageResource(R.drawable.goa);
+                break;
+            case "East Bengal":
+                profileImg.setImageResource(R.drawable.eastbengal);
+                break;
+            case "Jamshedpur":
+                profileImg.setImageResource(R.drawable.jamshedpur);
+                break;
+            case "Chennayin":
+                profileImg.setImageResource(R.drawable.chennai);
+                break;
+            case "Mumbai City":
+                profileImg.setImageResource(R.drawable.mumbai);
+                break;
+            case "NorthEast United":
+                profileImg.setImageResource(R.drawable.northeast);
+                break;
+        }
     }
 }
